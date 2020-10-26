@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name="com.nz.nztravelmate.dashboard.ServiceDetailsActivity"></activity>
         <activity android:name="com.nz.nztravelmate.startup.MapActivity" />
-        <activity android:name="com.nz.nztravelmate.startup.DashboardActivity" />
+        <activity android:name="com.nz.nztravelmate.dashboard.DashboardActivity" />
         <activity android:name="com.nz.nztravelmate.dashboard.BaseActivity" />
         <activity android:name="com.nz.nztravelmate.startup.SplashActivity">
             <intent-filter>

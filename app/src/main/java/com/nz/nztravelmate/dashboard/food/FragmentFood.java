@@ -53,6 +53,7 @@ public class FragmentFood extends Fragment {
         food.setService("Alipay Payment|Free wifi|Free Parking| Service");
 
 
+
         Food food1=new Food();
         food1.setName("Food 2 Service");
         food1.setAddress("B wing, Aditya Business Center, Kondhawa, Pune 411048");

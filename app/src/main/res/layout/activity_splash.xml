@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimension20dp"
-            android:padding="@dimen/dimension5dp"
+            android:padding="@dimen/dimension10dp"
             android:text="@string/headerTitle"
             android:textColor="@color/colorBlack"
             android:textSize="@dimen/dimension22dp"></TextView>
@@ -33,7 +33,9 @@
             android:background="@drawable/bg_gray_white"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/dimension15dp"
-            android:paddingRight="@dimen/dimension15dp">
+            android:paddingRight="@dimen/dimension15dp"
+            android:visibility="gone"
+            >
 
             <ImageView
                 android:layout_width="@dimen/dimension30dp"
@@ -145,7 +147,9 @@
             android:paddingLeft="@dimen/dimension10dp"
             android:text="@string/splashEPayment"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dimension20dp" />
+            android:textSize="@dimen/dimension20dp"
+            android:visibility="gone"
+            />
     </LinearLayout>
 </RelativeLayout><!-- <TextView
         android:id="@+id/txtBottom"

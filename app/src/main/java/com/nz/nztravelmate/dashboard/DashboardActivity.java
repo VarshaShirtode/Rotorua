@@ -1,4 +1,4 @@
-package com.nz.nztravelmate.startup;
+package com.nz.nztravelmate.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
+import com.nz.nztravelmate.startup.FragmentAttraction;
+import com.nz.nztravelmate.startup.MapActivity;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
@@ -125,7 +127,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.txtMap:
               //  callFragment("MAP",fragmentAccommodation);
-                Intent intent=new Intent(DashboardActivity.this,MapActivity.class);
+                Intent intent=new Intent(DashboardActivity.this, MapActivity.class);
                 startActivity(intent);
                 break;
             case R.id.txtProfile:

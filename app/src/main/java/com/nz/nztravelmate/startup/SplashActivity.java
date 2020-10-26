@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nz.nztravelmate.R;
+import com.nz.nztravelmate.dashboard.DashboardActivity;
 
 public class SplashActivity extends AppCompatActivity {
    RelativeLayout rlMain;

@@ -19,10 +19,10 @@ public class ServiceDetailPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-                FragmentDetail tab1 = new FragmentDetail();
+                FragmentIntroduction tab1 = new FragmentIntroduction();
                 return tab1;
             case 0:
-                FragmentDetail tab2 = new FragmentDetail();
+                FragmentIntroduction tab2 = new FragmentIntroduction();
                 return tab2;
             case 2:
                 FragmentClothing tab3 = new FragmentClothing();

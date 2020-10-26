@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimension5dp"
+            android:padding="@dimen/dimension10dp"
             android:layout_centerVertical="true"
             android:text="@string/headerTitle"
             android:textColor="@color/colorBlack"
@@ -31,6 +31,7 @@
             android:layout_margin="@dimen/dimension10dp"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingRight="@dimen/dimension15dp"
+            android:visibility="gone"
             >
             <ImageView
                 android:layout_width="@dimen/dimension30dp"
@@ -86,7 +87,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="####"
+            android:text="景点"
             android:drawableTop="@drawable/user_check"
             android:textSize="@dimen/dimension20dp"
             android:textStyle="bold"
@@ -99,7 +100,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="####"
+            android:text="美食"
             android:drawableTop="@drawable/user_uncheck"
             android:textSize="@dimen/dimension20dp"
             android:textStyle="bold"
@@ -112,7 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="####"
+            android:text="购物"
             android:drawableTop="@drawable/user_uncheck"
             android:textSize="@dimen/dimension20dp"
             android:textStyle="bold"

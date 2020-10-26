@@ -1,4 +1,4 @@
-package com.nz.nztravelmate;
+package com.nz.nztravelmate.dashboard;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.nz.nztravelmate.R;
 
-public class FragmentB extends Fragment {
+
+public class FragmentIntroduction extends Fragment {
     Context context=getActivity();
     View rootView;
    /* RecyclerView RecyclerFood;
@@ -20,7 +22,7 @@ public class FragmentB extends Fragment {
 
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
-        rootView=inflater.inflate(R.layout.fragment_b, container, false);
+        rootView=inflater.inflate(R.layout.fragment_introduction, container, false);
         /*initUI();
         getData();
         setData();*/

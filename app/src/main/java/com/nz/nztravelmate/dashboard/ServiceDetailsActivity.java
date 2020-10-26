@@ -4,8 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -15,19 +15,20 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.nz.nztravelmate.R;
-import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
-import com.nz.nztravelmate.startup.FragmentAttraction;
+import com.nz.nztravelmate.model.Food;
 
 public class ServiceDetailsActivity extends AppCompatActivity {
 TabLayout tabLayout;
-    FragmentDetail fragmentDetail;
-    FragmentB fragmentB;
+    FragmentIntroduction fragmentDetail;
+    FragmentDiscount fragmentB;
     FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     LinearLayout llA,llB;
     View vA,vB;
     RelativeLayout rlContainer;
     TextView txtA,txtB;
+    TextView txtName, txtAddress,txtDistance,txtTime,txtService;
+    Food food;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +91,8 @@ llB.setOnClickListener(new View.OnClickListener() {
 
     private void initFragment() {
         fragmentManager = getSupportFragmentManager();
-        fragmentDetail=new FragmentDetail();
-        fragmentB=new FragmentB();
+        fragmentDetail=new FragmentIntroduction();
+        fragmentB=new FragmentDiscount();
         callFragment("A", fragmentDetail);
         vA.setVisibility(View.VISIBLE);
         vB.setVisibility(View.GONE);
@@ -107,6 +108,24 @@ llB.setOnClickListener(new View.OnClickListener() {
         txtB = findViewById(R.id.txtB);
         vA=findViewById(R.id.vA);
         vB=findViewById(R.id.vB);
+        txtName=findViewById(R.id.txtName);
+        txtAddress=findViewById(R.id.txtAddress);
+        txtDistance=findViewById(R.id.txtDistance);
+        txtTime=findViewById(R.id.txtTime);
+        txtService=findViewById(R.id.txtService);
+
+
+//GetData from list and display
+        food=new Food();
+        Intent intent=getIntent();
+        food= (Food) intent.getExtras().getSerializable("ItemObject");
+        txtName.setText(food.getName());
+        txtAddress.setText(food.getAddress());
+        txtDistance.setText(food.getDistance());
+        txtTime.setText(food.getWeekTime()+"\n"+food.getWeekendTime());
+        txtService.setText(food.getService());
+
+
         //txtProfile = findViewById(R.id.txtProfile);
     }
     public void callFragment(String fragName, Fragment fragment) {

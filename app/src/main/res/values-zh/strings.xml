@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Rotorua</string>
-    <string name="headerTitle">体验罗托鲁瓦</string>
+    <string name="app_name">NZTravelMate</string>
+    <string name="headerTitle">NZTravelMate</string>
     <string name="splashdescription">"rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua "</string>
     <string name="splashEntryButton">Enter</string>
     <string name="splashVisitRotorua"><html><small>Visit</small> \n</html>ROTORUA</string>
