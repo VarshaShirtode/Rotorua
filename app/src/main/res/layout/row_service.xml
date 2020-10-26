@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@drawable/bg_gray_white_list"
+    android:id="@+id/relativeLayout"
+android:elevation="@dimen/dimension5dp"
+    android:layout_marginTop="@dimen/dimension10dp"
+    android:layout_marginBottom="@dimen/dimension10dp"
+    >
+    <RelativeLayout
+        android:id="@+id/rlTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimension10dp"
+        >
+        <ImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="@dimen/dimension70dp"
+            android:layout_height="@dimen/dimension70dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/website"
+            android:layout_margin="@dimen/dimension10dp"
+
+            >
+            ></ImageView>
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="First NAme"
+            android:textStyle="bold"
+            android:textSize="@dimen/dimension18dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            ></TextView>
+
+        <TextView
+            android:id="@+id/txtAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="Address\nAddress"
+            android:textSize="@dimen/dimension18dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtName"
+            android:layout_centerVertical="true"
+            ></TextView>
+
+        <ImageView
+            android:id="@+id/imgRight"
+            android:layout_width="@dimen/dimension30dp"
+            android:layout_height="@dimen/dimension30dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/user_check"
+            >
+            ></ImageView>
+    </RelativeLayout>
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimension3dp"
+        android:background="@color/colorGray"
+        android:layout_below="@+id/rlTop"
+        ></View>
+    <RelativeLayout
+        android:id="@+id/rlBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view"
+        android:layout_margin="@dimen/dimension10dp"
+        >
+    <TextView
+        android:id="@+id/txtDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="3 min away"
+        android:drawableLeft="@drawable/location"
+        android:drawablePadding="@dimen/dimension5dp"
+        android:textSize="@dimen/dimension18dp"
+        android:layout_margin="@dimen/dimension5dp"
+        ></TextView>
+    <TextView
+        android:id="@+id/txtTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="3 min away \n kkjkl"
+        android:drawableLeft="@drawable/location"
+        android:drawablePadding="@dimen/dimension5dp"
+        android:textSize="@dimen/dimension18dp"
+        android:layout_below="@+id/txtDistance"
+        android:layout_margin="@dimen/dimension5dp"
+        ></TextView>
+    <TextView
+        android:id="@+id/txtService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorBlack"
+        android:text="3 min away"
+        android:drawableLeft="@drawable/location"
+        android:drawablePadding="@dimen/dimension5dp"
+        android:textSize="@dimen/dimension18dp"
+        android:layout_below="@+id/txtTime"
+        android:layout_margin="@dimen/dimension5dp"
+        ></TextView>
+
+    </RelativeLayout>
+</RelativeLayout>
