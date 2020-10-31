@@ -271,31 +271,31 @@
             android:orientation="horizontal"
             android:layout_below="@+id/viewbeforetab"
             >
+
             <LinearLayout
                 android:id="@+id/llA"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                >
-            <TextView
-                android:id="@+id/txtA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="介绍"
-                android:textSize="@dimen/dimension22dp"
-                android:textStyle="bold"
-                android:textColor="@color/colorBlack"
-                android:padding="@dimen/dimension5dp"
-                android:gravity="center"
-                ></TextView>
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="@dimen/dimension5dp"
+                    android:text="@string/tabIntro"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/dimension22dp"
+                   ></TextView>
+
                 <View
                     android:id="@+id/vA"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension3dp"
-                    android:background="@color/colorSkyBlue"
-                    ></View>
+                    android:layout_height="7dp"
+                    android:background="@color/colorSkyBlue"></View>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/llB"
@@ -309,9 +309,8 @@
                     android:id="@+id/txtB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="优惠"
+                    android:text="@string/tabDiscount"
                     android:textSize="@dimen/dimension22dp"
-                    android:textStyle="bold"
                     android:textColor="@color/colorBlack"
                     android:padding="@dimen/dimension5dp"
                     android:gravity="center"

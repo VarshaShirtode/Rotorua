@@ -29,10 +29,10 @@ public class FragmentAttraction extends Fragment {
         rootView=inflater.inflate(R.layout.fragment_attraction_activity, container, false);
         imgTab=rootView.findViewById(R.id.imgTab);
         tabLayout= (TabLayout)rootView.findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Luxury"));//Luxury and Duty Fee
-        tabLayout.addTab(tabLayout.newTab().setText("Food"));// Food And Drink
-        tabLayout.addTab(tabLayout.newTab().setText("Clothing"));//Clothing and Souvenirs
-        tabLayout.addTab(tabLayout.newTab().setText("Accommodation"));//Accommodation
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tabattractions));//Luxury and Duty Fee
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tabgourmet));// Food And Drink
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tabshopping));//Clothing and Souvenirs
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.tabStay));//Accommodation
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         final ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter

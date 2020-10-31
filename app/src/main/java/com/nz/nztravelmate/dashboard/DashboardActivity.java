@@ -18,6 +18,7 @@ import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
 import com.nz.nztravelmate.startup.FragmentAttraction;
 import com.nz.nztravelmate.startup.MapActivity;
+import com.nz.nztravelmate.utils.LocaleManager;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
@@ -28,6 +29,11 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     FragmentAccommodation fragmentAccommodation;
     FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

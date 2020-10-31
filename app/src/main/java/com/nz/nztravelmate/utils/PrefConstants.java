@@ -1,5 +1,6 @@
 package com.nz.nztravelmate.utils;
 
-class PrefConstants {
+public class PrefConstants {
     public static final String FIRST_TIME ="" ;
+    public static final String LANGUAGE ="Language" ;
 }

@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">NZTravelMate</string>
-    <string name="headerTitle">NZTravelMate</string>
-    <string name="splashdescription">"rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua "</string>
-    <string name="splashEntryButton">Enter</string>
-    <string name="splashVisitRotorua"><html><small>Visit</small> \n</html>ROTORUA</string>
-    <string name="splashEPayment"><html>\n</html>ePayments</string>
-    <string name="tab_description">Rotorua [ˌɾɔtɔˈɾʉa][4][5] (Māori: Te Rotorua-nui-a-Kahumatamomoe \"The second great lake of Kahumatamomoe\") is a city on the southern shores of Lake Rotorua from which the city takes its name, located in the Bay of Plenty Region of New Zealand\'s North Island. It is the seat of the Rotorua Lakes District, a territorial authority encompassing Rotorua and several other nearby towns. The majority of the Rotorua District is in the Bay of Plenty Region, but a sizeable southern section and a small western section are in the Waikato region.[6] Rotorua is in the heart of the North Island, 60 kilometres (37 miles) south of Tauranga, 80 km (50 mi) north of Taupō, 105 km (65 mi) east of Hamilton, and 230 km (140 mi) southeast of the nation\'s most populous city, Auckland.  Rotorua has an estimated permanent population of 58,500, making it the country\'s 12th largest urban area, and the Bay of Plenty\'s second largest urban area behind Tauranga. The Rotorua District has a total estimated population of 77,300[3], of which 3,600 live in the Waikato section.[6]</string>
+    <string name="app_name">新西兰旅行伙伴</string>
+    <string name="headerTitle">新西兰旅行伙伴</string>
+    <string name="splashdescription">"丁p礼品测试券 a rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua "</string>
+    <string name="splashEntryButton">让我们来指导</string>
+    <string name="splashVisitRotorua"><html><small>访问</small> \n</html>ROTORUA</string>
+    <string name="splashEPayment"><html>\n</html>丁p礼品测试券 </string>
+    <string name="selectacity">丁p礼品测试券 </string>
+    <string name="tab_description">Rotorua [ˌɾɔtɔˈɾʉa] [4] [5]（毛利语：Te Rotorua-nui-a-Kahumatamomoe“ Kahumatamomoe的第二大湖”）是位于Rotorua湖南岸的城市，该城市以其名字命名，位于新西兰北岛的丰盛湾地区。它是罗托鲁瓦湖区（Rotorua Lakes District）的所在地，罗托鲁瓦湖区包括罗托鲁瓦和附近其他几个城镇。罗托路亚区的大部分地区位于普伦蒂湾地区，而怀卡托地区则是一个较大的南部地区和一个较小的西部地区。[6]罗托路亚（Rotorua）位于北岛的心脏地带，在陶朗加以南60公里（37英里），在陶波以北80公里（50英里），在汉密尔顿以东105公里（65英里），在东南部230公里（140英里）。全国人口最多的城市奥克兰。</string>
+    <string name="tabattractions">景点</string>
+    <string name="tabshopping">购物</string>
+    <string name="tabgourmet">美食</string>
+    <string name="tabStay">住宿</string>
+    <string name="tabAppear">岌现</string>
+    <string name="tabProfile">我的</string>
+    <string name="tabMap">地图</string>
+    <string name="tabIntro">介绍</string>
+    <string name="tabDiscount">优惠</string>
 </resources>

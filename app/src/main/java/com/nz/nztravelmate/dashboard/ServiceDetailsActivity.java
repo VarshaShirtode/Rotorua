@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,11 +17,12 @@ import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.model.Food;
+import com.nz.nztravelmate.utils.LocaleManager;
 
 public class ServiceDetailsActivity extends AppCompatActivity {
 TabLayout tabLayout;
     FragmentIntroduction fragmentDetail;
-    FragmentDiscount fragmentB;
+    FragmentDiscount fragmentDiscount;
     FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     LinearLayout llA,llB;
@@ -29,6 +31,12 @@ TabLayout tabLayout;
     TextView txtA,txtB;
     TextView txtName, txtAddress,txtDistance,txtTime,txtService;
     Food food;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +77,7 @@ TabLayout tabLayout;
 llB.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        callFragment("B", fragmentB);
+        callFragment("B", fragmentDiscount);
         vA.setVisibility(View.GONE);
         vB.setVisibility(View.VISIBLE);
 
@@ -92,7 +100,7 @@ llB.setOnClickListener(new View.OnClickListener() {
     private void initFragment() {
         fragmentManager = getSupportFragmentManager();
         fragmentDetail=new FragmentIntroduction();
-        fragmentB=new FragmentDiscount();
+        fragmentDiscount=new FragmentDiscount();
         callFragment("A", fragmentDetail);
         vA.setVisibility(View.VISIBLE);
         vB.setVisibility(View.GONE);

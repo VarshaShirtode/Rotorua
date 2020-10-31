@@ -22,6 +22,7 @@ public class FragmentAccommodation extends Fragment {
     View rootView;
     RecyclerView RecyclerFood;
     ArrayList<Food> foodlist;
+
     //Overriden method onCreateView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -3,14 +3,21 @@ package com.nz.nztravelmate.dashboard;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener;
 import com.nz.nztravelmate.R;
+import com.nz.nztravelmate.utils.LocaleManager;
 
 public class BaseActivity extends AppCompatActivity {
     TabLayout tabLayout;
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleManager.setLocale(base));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

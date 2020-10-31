@@ -2,11 +2,19 @@
     <string name="app_name">NzTravelMate</string>
     <string name="headerTitle">NzTravelMate</string>
     <string name="splashdescription">"rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua "</string>
-    <string name="splashEntryButton">Enter</string>
+    <string name="splashEntryButton">Let us guide</string>
     <string name="splashVisitRotorua"><html><small>Visit</small> \n</html>ROTORUA</string>
     <string name="splashEPayment"><html>\n</html>ePayments</string>
-    <string name="tab_description">Rotorua [ˌɾɔtɔˈɾʉa][4][5] (Māori: Te Rotorua-nui-a-Kahumatamomoe \"The second great lake of Kahumatamomoe\") is a city on the southern shores of Lake Rotorua from which the city takes its name, located in the Bay of Plenty Region of New Zealand\'s North Island. It is the seat of the Rotorua Lakes District, a territorial authority encompassing Rotorua and several other nearby towns. The majority of the Rotorua District is in the Bay of Plenty Region, but a sizeable southern section and a small western section are in the Waikato region.[6] Rotorua is in the heart of the North Island, 60 kilometres (37 miles) south of Tauranga, 80 km (50 mi) north of Taupō, 105 km (65 mi) east of Hamilton, and 230 km (140 mi) southeast of the nation\'s most populous city, Auckland.  Rotorua has an estimated permanent population of 58,500, making it the country\'s 12th largest urban area, and the Bay of Plenty\'s second largest urban area behind Tauranga. The Rotorua District has a total estimated population of 77,300[3], of which 3,600 live in the Waikato section.[6]</string>
+    <string name="selectacity">Select a City</string>
+    <string name="tab_description">Rotorua sits on the shores of Lake Rotorua of New Zealand. There are several other lakes nearby. Along with the geothermal wonders, there are also the more usual water activities such as fishing, boating and white water rafting. Tourism is a major industry in Rotorua, and for good reason, the tourism services are therefore well developed and visitors should definitely make a stop at the Tourist Information Centre on the main road, Fenton Street.</string>
+    <string name="tabattractions">Places</string>
+    <string name="tabshopping">Shopping</string>
+    <string name="tabgourmet">Gourmet</string>
+    <string name="tabStay">Stay</string>
+    <string name="tabAppear">Appear</string>
+    <string name="tabProfile">Profile</string>
+    <string name="tabMap">Map</string>
+    <string name="tabIntro">Introduction</string>
+    <string name="tabDiscount">Discount</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-   <!-- <string name="hello_blank_fragment">Hello blank fragment</string>-->
 </resources>
