@@ -35,7 +35,7 @@
             <ImageView
                 android:layout_width="@dimen/dimension30dp"
                 android:layout_height="@dimen/dimension30dp"
-                android:src="@drawable/threedot"
+                android:src="@drawable/back"
                 android:layout_margin="@dimen/dimension5dp"
                 android:scaleType="center"
                 android:paddingLeft="@dimen/dimension2dp"

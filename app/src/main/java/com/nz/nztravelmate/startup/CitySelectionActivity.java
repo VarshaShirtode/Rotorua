@@ -90,7 +90,7 @@ Context context=this;
             progressDialog.show();
             progressDialog.setCanceledOnTouchOutside(false);
 
-            ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+            ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
             Call<UserResponse> call = apiService.getCityList();
             call.enqueue(new Callback<UserResponse>() {
                 @Override
@@ -104,6 +104,7 @@ Context context=this;
                         //    cityList.clear();
                             for (int i = 0; i < userResponse.getCity().size(); i++) {
                                     cityList.add(userResponse.getCity().get(i));
+                                Log.v("@RESP", "RespCity: " + userResponse.getCity().get(i).getDescription());
                             }
                             setData();
                         } else {
@@ -111,14 +112,16 @@ Context context=this;
                         }
                     } catch (Exception ex) {
                         ex.printStackTrace();
-                        Toast.makeText(context, "Server Not Responding", LENGTH_SHORT).show();
+                        Log.v("@RESP", "RespCityException: " + ex.getLocalizedMessage());
+                        Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
                     }
                     progressDialog.dismiss();
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
-                    Toast.makeText(context, "Server Not Responding", LENGTH_SHORT).show();
+                    Log.v("@RESP", "RespCityFail: "+t.getLocalizedMessage());
+                    Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
                 }
             });
         }

@@ -12,6 +12,7 @@
         android:background="@color/colorWhite"
         >
         <TextView
+            android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimension10dp"
@@ -36,7 +37,7 @@
             <ImageView
                 android:layout_width="@dimen/dimension30dp"
                 android:layout_height="@dimen/dimension30dp"
-                android:src="@drawable/threedot"
+                android:src="@drawable/back"
                 android:layout_margin="@dimen/dimension5dp"
                 android:scaleType="center"
                 android:paddingLeft="@dimen/dimension2dp"
@@ -100,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/tabMap"
-            android:drawableTop="@drawable/user_uncheck"
+            android:drawableTop="@drawable/map_uncheck"
             android:textSize="@dimen/dimension20dp"
 
             android:textColor="@color/colorBlack"

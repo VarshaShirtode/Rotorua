@@ -32,12 +32,12 @@ Context context;
     }
 
     private void loadImage(ImageView profileImageView, String imagePath) {
-      //  String filePath = ApiConstants.GET_IMAGE + "contacts/" + imagePath;
-        String filePath =imagePath;
-        Log.i("@RESP", "ImageUrl: " + imagePath);
+      String filePath = ApiConstants.GET_IMAGE + imagePath;
+       // String filePath =imagePath;
+        Log.i("@RESP", "ImageUrl: " + filePath);
         Picasso.with(context)
-                .load(imagePath.replace(" ", "%20"))
-                .placeholder(R.drawable.splash)
+                .load(filePath.replace(" ", "%20"))
+                .placeholder(R.drawable.splash_lake)
                 .into(profileImageView);
     }
 
@@ -54,7 +54,6 @@ Context context;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         City food=cityList.get(position);
-
        //final City myListData = listdata[position];
         holder.txtName.setText(food.getName());
         if (food.getImage() != null) {
@@ -72,7 +71,7 @@ Context context;
                 Toast.makeText(view.getContext(),"click on item: "+cityList.get(position).getName(),Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(view.getContext(), SplashActivity.class);
                     intent.putExtra("CityObject",food);
-            view.getContext().startActivity(intent);
+                    view.getContext().startActivity(intent);
             }
         });
     }

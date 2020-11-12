@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
 import com.nz.nztravelmate.R;
+import com.nz.nztravelmate.model.Data;
 
 
 public class FragmentIntroduction extends Fragment {
     Context context=getActivity();
     View rootView;
+    TextView txtPlace;
+
    /* RecyclerView RecyclerFood;
     ArrayList<Food> foodlist;*/
     //Overriden method onCreateView
@@ -23,6 +27,14 @@ public class FragmentIntroduction extends Fragment {
         //Returning the layout file after inflating
         //Change R.layout.tab1 in you classes
         rootView=inflater.inflate(R.layout.fragment_introduction, container, false);
+        txtPlace=rootView.findViewById(R.id.txtPlace);
+        Data desc=ServiceDetailsActivity.getData();
+        txtPlace.setText(desc.getDescription());
+        /*if (getArguments() != null) {
+            desc = getArguments().getParcelable("Description");
+            txtPlace.setText(desc.getDescription());
+        }*/
+
         /*initUI();
         getData();
         setData();*/

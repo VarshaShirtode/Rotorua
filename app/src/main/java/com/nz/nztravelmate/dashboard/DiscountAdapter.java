@@ -47,9 +47,9 @@ Context context;
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+discountList.get(position).getName(),Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(view.getContext(), ServiceDetailsActivity.class);
-            view.getContext().startActivity(intent);
+                Toast.makeText(view.getContext(),"In Progress"+discountList.get(position).getName(),Toast.LENGTH_LONG).show();
+                   /* Intent intent=new Intent(view.getContext(), ServiceDetailsActivity.class);
+                    view.getContext().startActivity(intent);*/
             }
         });
     }

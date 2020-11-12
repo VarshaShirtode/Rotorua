@@ -15,10 +15,15 @@ import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.nz.nztravelmate.R;
-import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
+//import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
+import com.nz.nztravelmate.map.MapsActivity;
+import com.nz.nztravelmate.model.Category;
 import com.nz.nztravelmate.startup.FragmentAttraction;
-import com.nz.nztravelmate.startup.MapActivity;
 import com.nz.nztravelmate.utils.LocaleManager;
+import com.nz.nztravelmate.utils.PrefConstants;
+import com.nz.nztravelmate.utils.Preferences;
+
+import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
@@ -26,9 +31,12 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     RelativeLayout rlContainer;
     TextView txtFacility, txtMAp, txtProfile;
     FragmentAttraction fragmentAttraction;
-    FragmentAccommodation fragmentAccommodation;
+  //  FragmentAccommodation fragmentAccommodation;
     FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
+    ArrayList<Category> categoryList;
+    TextView txtTitle;
+    Preferences preferences;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -39,6 +47,13 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        preferences=new Preferences(context);
+        Intent intent=getIntent();
+        categoryList= (ArrayList<Category>) intent.getSerializableExtra("CategoryList");
+       /* for(int i=0;i<categoryList.size();i++)
+        {
+            Log.v("@RESP","Dashboard "+categoryList.get(i).getId()+" "+categoryList.get(i).getName());
+        }*/
         initUI();
         initFragment();
         initListner();
@@ -77,16 +92,19 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initUI() {
+        txtTitle=findViewById(R.id.txtTitle);
+        txtTitle.setText(preferences.getString(PrefConstants.CITY_NAME));
         rlContainer = findViewById(R.id.rlContainer);
         txtFacility = findViewById(R.id.txtFacility);
         txtMAp = findViewById(R.id.txtMap);
         txtProfile = findViewById(R.id.txtProfile);
+
     }
 
     private void initFragment() {
         fragmentManager = getSupportFragmentManager();
         fragmentAttraction = new FragmentAttraction();
-        fragmentAccommodation=new FragmentAccommodation();
+       // fragmentAccommodation=new FragmentAccommodation();
         callFirstFragment("SERVICE", fragmentAttraction);
 
     }
@@ -133,7 +151,9 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.txtMap:
               //  callFragment("MAP",fragmentAccommodation);
-                Intent intent=new Intent(DashboardActivity.this, MapActivity.class);
+                Intent intent=new Intent(DashboardActivity.this, MapsActivity.class);
+                intent.putExtra("LATLONG",preferences.getString(PrefConstants.CITY_MAP));
+                intent.putExtra("LABEL",preferences.getString(PrefConstants.CITY_NAME));
                 startActivity(intent);
                 break;
             case R.id.txtProfile:

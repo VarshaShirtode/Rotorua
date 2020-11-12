@@ -2,27 +2,8 @@ package com.nz.nztravelmate.model;
 
 import java.io.Serializable;
 
-public class City implements Serializable {
-    public String getMap() {
-        return map;
-    }
-
-    public void setMap(String map) {
-        this.map = map;
-    }
-
-    String map="";
+public class Category implements Serializable {
     String name="";
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    String description="";
 
     public String getId() {
         return id;

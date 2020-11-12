@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rsz_splash"
     tools:context=".startup.SplashActivity">
-
+    <ImageView
+        android:id="@+id/animated_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/wave_repeating_bg"
+        android:layout_gravity="center_vertical"
+        />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
@@ -15,7 +23,7 @@
         android:background="@color/colorWhite">
 
         <TextView
-            android:id="@+id/txtCity"
+            android:id="@+id/txtMainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -44,7 +52,7 @@
                 android:layout_margin="@dimen/dimension5dp"
                 android:paddingLeft="@dimen/dimension2dp"
                 android:scaleType="center"
-                android:src="@drawable/threedot"></ImageView>
+                android:src="@drawable/back"></ImageView>
 
             <View
                 android:layout_width="@dimen/dimension1dp"
@@ -66,11 +74,11 @@
         </LinearLayout>
     </RelativeLayout>
 
+
     <TextView
-        android:id="@+id/txtMainTitle"
+        android:id="@+id/txtCity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
         android:layout_marginLeft="@dimen/dimension60dp"
         android:layout_marginTop="@dimen/dimension60dp"
         android:text="@string/headerTitle"
@@ -82,7 +90,7 @@
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtMainTitle"
+        android:layout_below="@+id/txtCity"
         android:layout_marginLeft="@dimen/dimension50dp"
         android:layout_marginTop="@dimen/dimension60dp"
         android:layout_marginRight="@dimen/dimension50dp"
@@ -134,7 +142,7 @@
             android:paddingRight="10dp"
             android:text="@string/splashVisitRotorua"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dimension20dp"
+            android:textSize="20sp"
 
             />
 
@@ -152,7 +160,9 @@
             android:visibility="gone"
             />
     </LinearLayout>
-</RelativeLayout><!-- <TextView
+</RelativeLayout>
+    </FrameLayout>
+<!-- <TextView
         android:id="@+id/txtBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

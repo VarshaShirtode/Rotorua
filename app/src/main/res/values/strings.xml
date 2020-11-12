@@ -7,14 +7,15 @@
     <string name="splashEPayment"><html>\n</html>ePayments</string>
     <string name="selectacity">Select a City</string>
     <string name="tab_description">Rotorua sits on the shores of Lake Rotorua of New Zealand. There are several other lakes nearby. Along with the geothermal wonders, there are also the more usual water activities such as fishing, boating and white water rafting. Tourism is a major industry in Rotorua, and for good reason, the tourism services are therefore well developed and visitors should definitely make a stop at the Tourist Information Centre on the main road, Fenton Street.</string>
-    <string name="tabattractions">Places</string>
-    <string name="tabshopping">Shopping</string>
-    <string name="tabgourmet">Gourmet</string>
-    <string name="tabStay">Stay</string>
+    <string name="tabattractions">Luxury</string>
+    <string name="tabshopping">Clothing</string>
+    <string name="tabgourmet">Food</string>
+    <string name="tabStay">Stays</string>
     <string name="tabAppear">Appear</string>
     <string name="tabProfile">Profile</string>
     <string name="tabMap">Map</string>
     <string name="tabIntro">Introduction</string>
     <string name="tabDiscount">Discount</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

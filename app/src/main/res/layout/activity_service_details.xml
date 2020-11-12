@@ -1,353 +1,363 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dashboard.ServiceDetailsActivity"
     >-->
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".dashboard.ServiceDetailsActivity">
+
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        >
+        android:background="@color/colorWhite">
+
         <ImageView
             android:id="@+id/imgBack"
-            android:layout_width="@dimen/dimension30dp"
+            android:layout_width="@dimen/dimension40dp"
             android:layout_height="@dimen/dimension30dp"
-            android:src="@drawable/threedot"
-            android:layout_margin="@dimen/dimension10dp"
-            android:scaleType="center"
             android:layout_centerVertical="true"
-            ></ImageView>
+            android:layout_margin="@dimen/dimension10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/back"></ImageView>
+
         <TextView
+            android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dimension10dp"
             android:layout_centerVertical="true"
-            android:text="@string/headerTitle"
+            android:layout_marginLeft="@dimen/dimension10dp"
             android:layout_toRightOf="@+id/imgBack"
+            android:padding="@dimen/dimension10dp"
+            android:text="@string/headerTitle"
             android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dimension22dp"
-            android:layout_marginLeft="@dimen/dimension20dp"
-            ></TextView>
+            android:textSize="@dimen/dimension22dp"></TextView>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_alignParentRight="true"
-            android:background="@drawable/bg_gray_white"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dimension10dp"
+            android:background="@drawable/bg_gray_white"
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/dimension15dp"
             android:paddingRight="@dimen/dimension15dp"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
+
             <ImageView
                 android:layout_width="@dimen/dimension30dp"
                 android:layout_height="@dimen/dimension30dp"
-                android:src="@drawable/threedot"
                 android:layout_margin="@dimen/dimension5dp"
-                android:scaleType="center"
                 android:paddingLeft="@dimen/dimension2dp"
-                ></ImageView>
+                android:scaleType="center"
+                android:src="@drawable/back"></ImageView>
+
             <View
                 android:layout_width="@dimen/dimension1dp"
                 android:layout_height="match_parent"
-                android:background="@color/colorGray"
-                android:layout_marginTop="@dimen/dimension5dp"
-                android:layout_marginBottom="@dimen/dimension5dp"
-                android:layout_marginRight="@dimen/dimension10dp"
                 android:layout_marginLeft="@dimen/dimension10dp"
-
-                ></View>
-            <ImageView
-                android:layout_width="@dimen/dimension30dp"
-                android:layout_height="@dimen/dimension30dp"
-                android:src="@drawable/location"
-                android:layout_margin="@dimen/dimension5dp"
-                android:scaleType="center"
-                android:paddingRight="@dimen/dimension2dp"
-                ></ImageView>
-        </LinearLayout>
-    </RelativeLayout>
-   <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".dashboard.ServiceDetailsActivity"
-       android:layout_below="@+id/header"
-
-        >
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       >
-    <RelativeLayout
-        android:id="@+id/rlTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        >
-        <TextView
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimension20dp"
-            android:layout_marginTop="@dimen/dimension20dp"
-            android:layout_marginRight="@dimen/dimension20dp"
-            android:text="@string/headerTitle"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dimension30dp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtPlace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="Hell's Gate"
-            android:layout_below="@+id/txtName"
-            android:textColor="@color/colorBlack"
-            android:textSize="@dimen/dimension20dp"
-            android:layout_marginLeft="@dimen/dimension20dp"
-            android:visibility="gone"
-            ></TextView>
-
-        <RelativeLayout
-            android:id="@+id/rlAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtPlace"
-            android:layout_marginLeft="@dimen/dimension20dp"
-            android:layout_marginRight="@dimen/dimension20dp"
-
-            >
-
-            <TextView
-                android:id="@+id/txtAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sr No 36/3/3, Gangawas Society, Erandwane, Pune 411038"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/dimension18dp"
-                android:layout_toLeftOf="@+id/imgLocation"
-                android:layout_centerVertical="true"
-                ></TextView>
-            <ImageView
-                android:id="@+id/imgLocation"
-                android:layout_width="@dimen/dimension30dp"
-                android:layout_height="@dimen/dimension30dp"
-                android:src="@drawable/loc"
-                android:scaleType="fitXY"
-                android:layout_toLeftOf="@+id/viewBreak"
-                android:layout_centerVertical="true"
-                ></ImageView>
-            <View
-                android:id="@+id/viewBreak"
-                android:layout_width="@dimen/dimension2dp"
-                android:layout_height="@dimen/dimension30dp"
-                android:background="@color/colorGray"
                 android:layout_marginTop="@dimen/dimension5dp"
+                android:layout_marginRight="@dimen/dimension10dp"
                 android:layout_marginBottom="@dimen/dimension5dp"
-                android:layout_marginRight="@dimen/dimension2dp"
-                android:layout_marginLeft="@dimen/dimension2dp"
-                android:layout_toLeftOf="@+id/imgCall"
+                android:background="@color/colorGray"
+
                 ></View>
+
             <ImageView
-                android:id="@+id/imgCall"
                 android:layout_width="@dimen/dimension30dp"
                 android:layout_height="@dimen/dimension30dp"
-                android:src="@drawable/loc"
-                android:scaleType="fitXY"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                ></ImageView>
-        </RelativeLayout>
-        <TextView
-            android:id="@+id/txtStatus"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/headerTitle"
-            android:textColor="@color/colorGreen"
-            android:textSize="@dimen/dimension18dp"
-            android:layout_below="@+id/rlAddress"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dimension20dp"
-            android:layout_marginTop="@dimen/dimension10dp"
-            ></TextView>
-        <ImageView
-            android:id="@+id/imgTab"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimension270dp"
-            android:src="@drawable/resize"
-            android:layout_below="@+id/txtStatus"
-            android:scaleType="fitXY"
-            android:layout_marginTop="@dimen/dimension10dp"
-            android:layout_marginBottom="@dimen/dimension10dp"
-            ></ImageView>
-
-    </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/rlBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rlTop"
-        android:layout_margin="@dimen/dimension10dp"
-        >
-        <TextView
-            android:id="@+id/txtDistance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="Takes 45 minutes"
-            android:drawableLeft="@drawable/location"
-            android:drawablePadding="@dimen/dimension5dp"
-            android:textSize="@dimen/dimension18dp"
-            android:layout_margin="@dimen/dimension5dp"
-            ></TextView>
-        <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="Mon-Fri 9:30am-8:30pm\nSat-Sun 8:30am-8:30pm"
-            android:drawableLeft="@drawable/location"
-            android:drawablePadding="@dimen/dimension5dp"
-            android:textSize="@dimen/dimension18dp"
-            android:layout_below="@+id/txtDistance"
-            android:layout_margin="@dimen/dimension5dp"
-            ></TextView>
-        <TextView
-            android:id="@+id/txtService"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="Alipay Payment|Free wifi|Free Parking| Service"
-            android:drawableLeft="@drawable/location"
-            android:drawablePadding="@dimen/dimension5dp"
-            android:textSize="@dimen/dimension18dp"
-            android:layout_below="@+id/txtTime"
-            android:layout_margin="@dimen/dimension5dp"
-            ></TextView>
-    </RelativeLayout>
-    <View
-        android:id="@+id/viewbeforetab"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimension10dp"
-        android:background="@color/colorGray"
-        android:layout_below="@+id/rlBottom"
-        ></View>
-    <!--<com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabBackground="@color/colorWhite"
-        app:tabSelectedTextColor="@color/colorSkyBlue"
-        app:tabTextColor="@color/colorBlack"
-        android:layout_below="@+id/viewbeforetab"
-        android:elevation="6dp"
-        android:scrollbars="none"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tab_layout"
-        />
--->
-        <LinearLayout
-            android:id="@+id/llFooter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_below="@+id/viewbeforetab"
-            >
-
-            <LinearLayout
-                android:id="@+id/llA"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/txtA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="@dimen/dimension5dp"
-                    android:text="@string/tabIntro"
-                    android:textColor="@color/colorBlack"
-                    android:textSize="@dimen/dimension22dp"
-                   ></TextView>
-
-                <View
-                    android:id="@+id/vA"
-                    android:layout_width="match_parent"
-                    android:layout_height="7dp"
-                    android:background="@color/colorSkyBlue"></View>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/llB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:id="@+id/txtB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tabDiscount"
-                    android:textSize="@dimen/dimension22dp"
-                    android:textColor="@color/colorBlack"
-                    android:padding="@dimen/dimension5dp"
-                    android:gravity="center"
-                    ></TextView>
-                <View
-                    android:id="@+id/vB"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dimension3dp"
-                    android:background="@color/colorSkyBlue"
-                    android:visibility="gone"
-                    ></View>
-            </LinearLayout>
-
-
+                android:layout_margin="@dimen/dimension5dp"
+                android:paddingRight="@dimen/dimension2dp"
+                android:scaleType="center"
+                android:src="@drawable/location"></ImageView>
         </LinearLayout>
-        <RelativeLayout
-            android:id="@+id/rlContainer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/llFooter"
+    </RelativeLayout>
 
-            >
-           <!-- <TextView
-                android:id="@+id/txtServiced"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header"
+        tools:context=".dashboard.ServiceDetailsActivity"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rlTop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:text="Alipay Payment|Free\n\n\n\n\n wifi|Free Parking| Service"
-                android:drawableLeft="@drawable/location"
-                android:drawablePadding="@dimen/dimension5dp"
-                android:textSize="@dimen/dimension18dp"
 
-                android:layout_margin="@dimen/dimension5dp"
-                ></TextView>-->
+                >
+
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimension20dp"
+                    android:layout_marginTop="@dimen/dimension20dp"
+                    android:layout_marginRight="@dimen/dimension20dp"
+                    android:text="@string/headerTitle"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/dimension30dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtName"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimension20dp"
+                    android:text="Hell's Gate"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/dimension20dp"
+                    android:visibility="gone"></TextView>
+
+                <RelativeLayout
+                    android:id="@+id/rlAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtPlace"
+                    android:layout_marginLeft="@dimen/dimension20dp"
+                    android:layout_marginRight="@dimen/dimension20dp"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/txtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/imgLocation"
+                        android:text="Sr No 36/3/3, Gangawas Society, Erandwane, Pune 411038"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/dimension18dp"
+                        android:gravity="top"
+                        ></TextView>
+
+                    <ImageView
+                        android:id="@+id/imgLocation"
+                        android:layout_width="@dimen/dimension30dp"
+                        android:layout_height="@dimen/dimension30dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/viewBreak"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/marker"></ImageView>
+
+                    <View
+                        android:id="@+id/viewBreak"
+                        android:layout_width="@dimen/dimension2dp"
+                        android:layout_height="@dimen/dimension30dp"
+                        android:layout_marginLeft="@dimen/dimension2dp"
+                        android:layout_marginRight="@dimen/dimension2dp"
+                        android:layout_toLeftOf="@+id/imgCall"
+                        android:background="@color/colorBlack"></View>
+
+                    <ImageView
+                        android:id="@+id/imgCall"
+                        android:layout_width="@dimen/dimension30dp"
+                        android:layout_height="@dimen/dimension30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/call"></ImageView>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rlAddress"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dimension20dp"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:text="@string/headerTitle"
+                    android:textColor="@color/colorGreen"
+                    android:textSize="@dimen/dimension18dp"></TextView>
+
+                <ImageView
+                    android:id="@+id/imgTab"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimension270dp"
+                    android:layout_below="@+id/txtStatus"
+                    android:layout_marginTop="@dimen/dimension10dp"
+                    android:layout_marginBottom="@dimen/dimension10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/resize"></ImageView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlTop"
+                android:layout_margin="@dimen/dimension10dp">
+
+                <TextView
+                    android:id="@+id/txtDistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:text="3 min away"
+                    android:drawableLeft="@drawable/resize_icon"
+                    android:drawablePadding="@dimen/dimension5dp"
+                    android:textSize="@dimen/dimension16dp"
+                    android:layout_marginLeft="@dimen/dimension3dp"
+                    android:layout_marginRight="@dimen/dimension3dp"
+                    android:gravity="center_vertical"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/txtTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:text="3 min away"
+                    android:drawableLeft="@drawable/resize_time_icon"
+                    android:drawablePadding="@dimen/dimension5dp"
+                    android:textSize="@dimen/dimension16dp"
+                    android:layout_below="@+id/txtDistance"
+                    android:layout_marginLeft="@dimen/dimension3dp"
+                    android:layout_marginRight="@dimen/dimension3dp"
+                    android:layout_marginTop="@dimen/dimension1dp"
+                    android:gravity="center_vertical"
+                    ></TextView>
+                <TextView
+                    android:id="@+id/txtService"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:text="3 min away"
+                    android:drawableLeft="@drawable/resize_service_icon"
+                    android:drawablePadding="@dimen/dimension5dp"
+                    android:textSize="@dimen/dimension16dp"
+                    android:layout_below="@+id/txtTime"
+                    android:layout_marginLeft="@dimen/dimension3dp"
+                    android:layout_marginRight="@dimen/dimension3dp"
+                    android:layout_marginTop="@dimen/dimension1dp"
+                    android:gravity="center_vertical"
+                    ></TextView>
+
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/viewbeforetab"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimension10dp"
+                android:layout_below="@+id/rlBottom"
+                android:background="@color/colorGray"></View>
+            <!--<com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabBackground="@color/colorWhite"
+                app:tabSelectedTextColor="@color/colorSkyBlue"
+                app:tabTextColor="@color/colorBlack"
+                android:layout_below="@+id/viewbeforetab"
+                android:elevation="6dp"
+                android:scrollbars="none"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tab_layout"
+                />
+        -->
+            <LinearLayout
+                android:id="@+id/llFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/viewbeforetab"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/llA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtA"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/dimension5dp"
+                        android:text="@string/tabIntro"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/dimension22dp"></TextView>
+
+                    <View
+                        android:id="@+id/vA"
+                        android:layout_width="match_parent"
+                        android:layout_height="7dp"
+                        android:background="@color/colorSkyBlue"></View>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtB"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="@dimen/dimension5dp"
+                        android:text="@string/tabDiscount"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="@dimen/dimension22dp"></TextView>
+
+                    <View
+                        android:id="@+id/vB"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimension3dp"
+                        android:background="@color/colorSkyBlue"
+                        android:visibility="gone"></View>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/llFooter"
+
+                >
+                <!-- <TextView
+                     android:id="@+id/txtServiced"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/colorBlack"
+                     android:text="Alipay Payment|Free\n\n\n\n\n wifi|Free Parking| Service"
+                     android:drawableLeft="@drawable/location"
+                     android:drawablePadding="@dimen/dimension5dp"
+                     android:textSize="@dimen/dimension18dp"
+
+                     android:layout_margin="@dimen/dimension5dp"
+                     ></TextView>-->
+            </RelativeLayout>
         </RelativeLayout>
-</RelativeLayout>
-   </ScrollView>
+    </ScrollView>
 </RelativeLayout>
 
 
