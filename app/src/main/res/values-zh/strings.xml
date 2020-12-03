@@ -18,4 +18,22 @@
     <string name="tabIntro">介绍</string>
     <string name="tabDiscount">优惠</string>
     <string name="title_activity_maps">Map</string>
+    <string name="Visit">访问</string>
+
+    <string name="Payment">备用付款</string>
+    <string name="Mandarin_Speaking_Staff">普通话工作人员</string>
+    <string name="Free_Wifi">免费WiFi</string>
+    <string name="Free_Parking">免费停车场</string>
+    <string name="Yes">是</string>
+    <string name="No">没有</string>
+    <string name="NoService">没有可用的服务</string>
+
+    <string name="Spend">建议的支出</string>
+    <string name="SuggestedTime">建议时间</string>
+    <string name="OperatedTime">工作时间</string>
+    <string name="Website">网站</string>
+    <string name="permissionmessage">您需要通过应用权限设置授予“电话”权限才能拨打电话，\n是否要继续授予该权限？</string>
+    <string name="OK">好</string>
+    <string name="Cancel">取消</string>
+
 </resources>

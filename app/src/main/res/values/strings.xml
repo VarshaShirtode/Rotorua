@@ -17,5 +17,22 @@
     <string name="tabIntro">Introduction</string>
     <string name="tabDiscount">Discount</string>
     <string name="title_activity_maps">Map</string>
+    <string name="Visit">Visit</string>
+
+    <string name="Payment">Alternate Payment</string>
+    <string name="Mandarin_Speaking_Staff">Mandarin Speaking Staff</string>
+    <string name="Free_Wifi">Free Wifi</string>
+    <string name="Free_Parking">Free Parking</string>
+    <string name="Yes">Yes</string>
+    <string name="No">No</string>
+    <string name="NoService">No Service Available</string>
+
+    <string name="Spend">Suggested Spend</string>
+    <string name="SuggestedTime">Suggested Time</string>
+    <string name="OperatedTime">Operating Timing</string>
+    <string name="Website">Website</string>
+    <string name="permissionmessage">"You need to grant Telephone permission from app permission setting for make a call,\n Do you want continue to grant the permission?</string>
+    <string name="OK">Ok</string>
+    <string name="Cancel">Cancel</string>
 
 </resources>

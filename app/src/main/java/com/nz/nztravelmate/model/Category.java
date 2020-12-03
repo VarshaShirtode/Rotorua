@@ -1,6 +1,7 @@
 package com.nz.nztravelmate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Category implements Serializable {
     String name="";
@@ -32,5 +33,15 @@ public class Category implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public ArrayList<CategoryDetails> getCategory_details() {
+        return category_details;
+    }
+
+    public void setCategory_details(ArrayList<CategoryDetails> category_details) {
+        this.category_details = category_details;
+    }
+
+    ArrayList<CategoryDetails> category_details=new ArrayList();
 
 }

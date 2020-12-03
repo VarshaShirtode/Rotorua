@@ -65,6 +65,7 @@ Preferences preferences;
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.LANGUAGE,"Chinese");
+                preferences.putInt(PrefConstants.LANGUAGE_ID,2);
                 setNewLocale(LocaleManager.LANGUAGE_CHINESE, true);
             }
         });
@@ -72,6 +73,7 @@ Preferences preferences;
             @Override
             public void onClick(View v) {
                 preferences.putString(PrefConstants.LANGUAGE,"English");
+                preferences.putInt(PrefConstants.LANGUAGE_ID,1);
                 setNewLocale(LocaleManager.LANGUAGE_ENGLISH, true);
             }
         });
@@ -108,6 +110,7 @@ Preferences preferences;
                        // Snackbar.make(LanguageSelectionActivity.this, "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
                     Toast.makeText(context,"Permission Granted, Now you can access location data and call.",Toast.LENGTH_SHORT).show();
                     else {
+                     // requestPermission();
                         Toast.makeText(context,"Permission Denied, You cannot access location data and call.",Toast.LENGTH_SHORT).show();
 
                      //   Snackbar.make(view, "Permission Denied, You cannot access location data and camera.", Snackbar.LENGTH_LONG).show();

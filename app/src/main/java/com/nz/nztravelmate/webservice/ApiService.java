@@ -25,10 +25,10 @@ public interface ApiService {
     })
 
     @POST(ApiConstants.GET_CITY)
-    Call<UserResponse> getCityList();
+    Call<UserResponse> getCityList(@Query("language_id") String language_id);
 
     @POST(ApiConstants.GET_CATEGORY)
-    Call<UserResponse> getCategoryList();
+    Call<UserResponse> getCategoryList(@Query("language_id") String language_id);
 
     @POST(ApiConstants.GET_BUSINESS_DETAILS)
     @FormUrlEncoded

@@ -18,6 +18,8 @@ import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.model.City;
 import com.nz.nztravelmate.model.UserResponse;
 import com.nz.nztravelmate.utils.LocaleManager;
+import com.nz.nztravelmate.utils.PrefConstants;
+import com.nz.nztravelmate.utils.Preferences;
 import com.nz.nztravelmate.webservice.ApiService;
 import com.nz.nztravelmate.webservice.RetrofitClient;
 
@@ -34,7 +36,7 @@ Context context=this;
     View rootView;
     RecyclerView RecyclerFood;
     ArrayList<City> cityList;
-
+Preferences preferences;
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleManager.setLocale(base));
@@ -44,7 +46,7 @@ Context context=this;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_selection);
-
+preferences=new Preferences(context);
         initUI();
         getData();
 
@@ -64,9 +66,9 @@ Context context=this;
         food2.setName("Rotorua");
         food2.setImgUrl("Sr No 36/3/3, Gangawas Society, Erandwane, Pune 411038");
 
+        food3.setImgUrl("Sr No 36/3/3, Gangawas Society, Erandwane, Pune 411038");
         City food3=new City();
         food3.setName("MelBourne");
-        food3.setImgUrl("Sr No 36/3/3, Gangawas Society, Erandwane, Pune 411038");
 
 
         City food=new City();
@@ -91,7 +93,7 @@ Context context=this;
             progressDialog.setCanceledOnTouchOutside(false);
 
             ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
-            Call<UserResponse> call = apiService.getCityList();
+            Call<UserResponse> call = apiService.getCityList(""+preferences.getInt(PrefConstants.LANGUAGE_ID));
             call.enqueue(new Callback<UserResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {

@@ -2,8 +2,12 @@ package com.nz.nztravelmate.dashboard;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.text.Html;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,26 +49,51 @@ Context context;
         Data food=foodlist.get(position);
 
        //final Data myListData = listdata[position];
-        holder.txtName.setText(food.getBusiness_name_english());
+        holder.txtName.setText(food.getName());
         holder.txtAddress.setText(food.getAddress());
+        holder.txtShort.setText(food.getShort_description());
+        if (!food.getWebsite().equals("")) {
+            String styledText = "<span style=color:red>"+food.getWebsite()+"</span>";
+            holder.txtWebsite.setText(context.getResources().getString(R.string.Website)+" : "+Html.fromHtml(styledText),TextView.BufferType.SPANNABLE);
+            Spannable sText = (Spannable) holder.txtWebsite.getText();
+            sText.setSpan(new ForegroundColorSpan(Color.BLUE), 10, sText.length(), 0);
+        }
+        if (!food.getAvg_doller().equals("")) {
+            holder.txtSpend.setText(context.getResources().getString(R.string.Spend)+" : "+food.getAvg_doller());
+        }
+        holder.txtWebsite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url=food.getWebsite().toString().trim();
+                Uri webpage = Uri.parse(url);
+
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    webpage = Uri.parse("http://" + url);
+                }
+                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
+                httpIntent.setData(webpage);
+
+                context.startActivity(httpIntent);
+            }
+        });
         if (food.getAvg_time()==null)
         {
-            holder.txtDistance.setText("No Data Available");
+            holder.txtDistance.setText(context.getResources().getString(R.string.SuggestedTime)+" : "+"");
           //  holder.txtDistance.setVisibility(View.GONE);
         }else{
-            holder.txtDistance.setText(food.getAvg_time());
+            holder.txtDistance.setText(context.getResources().getString(R.string.SuggestedTime)+" : "+food.getAvg_time());
            // holder.txtDistance.setVisibility(View.VISIBLE);
         }
 
         if (food.getBusiness_hrs()==null)
         {
-            holder.txtTime.setText("No Data Available");
-            //  holder.txtTime.setVisibility(View.GONE);
+            holder.txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+"");
+            //  holder.txtTime.setVisizcw67bility(View.GONE);
         }else{
             String name=food.getBusiness_hrs().trim();
             name=name.replace("<p>","");
             name=name.replace("</p>","");
-            holder.txtTime.setText(name);
+            holder.txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+name);
 
         }
         String Service="";
@@ -78,11 +107,11 @@ Context context;
             {*/
         if (!food.getPayment_id().isEmpty())
         {
-            Service = Service+ "Payment" + " : " ;
+            Service = Service+ context.getResources().getString(R.string.Payment) + " : " ;
 
             for (int i=0;i<food.getPayment_id().size();i++)
             {
-                Service = Service+ food.getPayment_id().get(i).getPayment_method_name()+ ", ";
+                Service = Service+ food.getPayment_id().get(i).getName()+ ", ";
             }
             if (!Service.equals(""))
             {
@@ -117,68 +146,70 @@ Context context;
                 }
             }*/
        // }
-        if (food.getWifi()!=null)
-        {
-            String data=food.getWifi();
-            int available= Integer.parseInt(data.substring(0,1));
-            if (available==1)
-            {
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Free Wifi" + " : " + "Yes," + msg + "\n";
-                }else{
-                    Service =Service+ "Free Wifi" + " : " + "Yes"+ "\n";
-                }
-            }else{
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Free Wifi" + " : " + "No," + msg + "\n";
-                }else{
-                    Service =Service+ "Free Wifi" + " : " + "No"+ "\n";
+        if (food.getWifi()!=null) {
+            String data = food.getWifi();
+            if (!data.equals("")) {
+                int available = Integer.parseInt(data.substring(0, 1));
+                if (available == 1) {
+                    if (data.length() != 1) {
+                        String msg = data.substring(2, data.length());
+                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg + "\n";
+                    } else {
+                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes) + "\n";
+                    }
+                } else {
+                    if (data.length() != 1) {
+                        String msg = data.substring(2, data.length());
+                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No) + ", " + msg + "\n";
+                    } else {
+                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No) + "\n";
+                    }
                 }
             }
         }
         if (food.getParking()!=null)
         {
             String data=food.getParking();
-            int available= Integer.parseInt(data.substring(0,1));
-            if (available==1)
-            {
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Free Parking" + " : " + "Yes," + msg + "\n";
-                }else{
-                    Service =Service+ "Free Parking" + " : " + "Yes"+ "\n";
-                }
-            }else{
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Free Parking" + " : " + "No," + msg + "\n";
-                }else{
-                    Service =Service+ "Free Parking" + " : " + "No"+ "\n";
+            if (!data.equals("")) {
+                int available = Integer.parseInt(data.substring(0, 1));
+                if (available == 1) {
+                    if (data.length() != 1) {
+                        String msg = data.substring(2, data.length());
+                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg + "\n";
+                    } else {
+                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes) + "\n";
+                    }
+                } else {
+                    if (data.length() != 1) {
+                        String msg = data.substring(2, data.length());
+                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No) + ", " + msg + "\n";
+                    } else {
+                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No) + "\n";
+                    }
                 }
             }
         }
-        if (food.getMandarin_speaking_staff()!=null)
+        if (food.getStaff()!=null)
         {
-            String data=food.getMandarin_speaking_staff();
-            int available= Integer.parseInt(data.substring(0,1));
-            if (available==1)
-            {
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Mandarin Speaking Staff" + " : " + "Yes," + msg + "\n";
-                }else{
-                    Service =Service+ "Mandarin Speaking Staff" + " : " + "Yes"+ "\n";
-                }
-            }else{
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Mandarin Speaking Staff" + " : " + "No," + msg + "\n";
-                }else{
-                    Service =Service+ "Mandarin Speaking Staff" + " : " + "No"+ "\n";
-                }
-            }
+            String data=food.getStaff();
+         if (!data.equals("")) {
+             int available = Integer.parseInt(data.substring(0, 1));
+             if (available == 1) {
+                 if (data.length() != 1) {
+                     String msg = data.substring(2, data.length());
+                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg + "\n";
+                 } else {
+                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes) + "\n";
+                 }
+             } else {
+                 if (data.length() != 1) {
+                     String msg = data.substring(2, data.length());
+                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No) + ", " + msg + "\n";
+                 } else {
+                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No) + "\n";
+                 }
+             }
+         }
         }
         if (!Service.equals(""))
         {
@@ -195,7 +226,7 @@ Context context;
             }*/
             holder.txtService.setText(Service);
         }else{
-            holder.txtService.setText("No Service Available");
+            holder.txtService.setText(context.getResources().getString(R.string.NoService));
         }
 
       if (food.getLogo()!=null) {
@@ -205,7 +236,7 @@ Context context;
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+foodlist.get(position).getName(),Toast.LENGTH_LONG).show();
+              //  Toast.makeText(view.getContext(),"click on item: "+foodlist.get(position).getName(),Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(view.getContext(), ServiceDetailsActivity.class);
                     intent.putExtra("ItemObject",food);
             view.getContext().startActivity(intent);
@@ -229,7 +260,7 @@ Context context;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imgProfile,imgRight;
-        public TextView txtName,txtAddress,txtDistance,txtTime,txtService;
+        public TextView txtName,txtAddress,txtDistance,txtTime,txtService,txtShort,txtSpend,txtWebsite;
         public RelativeLayout relativeLayout;
         public ViewHolder(View itemView) {
             super(itemView);
@@ -237,7 +268,10 @@ Context context;
             this.txtName= (TextView) itemView.findViewById(R.id.txtName);
             this.txtAddress =(TextView) itemView.findViewById(R.id.txtAddress);
             this.txtDistance = (TextView) itemView.findViewById(R.id.txtDistance);
+            this.txtSpend =(TextView) itemView.findViewById(R.id.txtSpend);
+            this.txtShort = (TextView) itemView.findViewById(R.id.txtShort);
             this.txtTime= (TextView) itemView.findViewById(R.id.txtTime);
+            this.txtWebsite= (TextView) itemView.findViewById(R.id.txtWebsite);
             this.txtService =(TextView) itemView.findViewById(R.id.txtService);
             this.relativeLayout =(RelativeLayout) itemView.findViewById(R.id.relativeLayout);
         }

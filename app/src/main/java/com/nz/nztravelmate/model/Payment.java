@@ -5,6 +5,16 @@ import java.io.Serializable;
 public class Payment implements Serializable {
     String id="";
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    String name="";
+
     public String getId() {
         return id;
     }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:background="@drawable/bg_gray_white_list"
     android:id="@+id/relativeLayout"
-android:elevation="@dimen/dimension5dp"
+    android:elevation="@dimen/dimension5dp"
     android:layout_marginTop="@dimen/dimension10dp"
     android:layout_marginBottom="@dimen/dimension10dp"
     >
@@ -12,17 +12,21 @@ android:elevation="@dimen/dimension5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimension10dp"
-android:background="#00000000"
+        android:background="#00000000"
         >
+
         <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dimension70dp"
             android:layout_height="@dimen/dimension70dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/website"
-            android:layout_margin="@dimen/dimension10dp"
+            android:layout_marginStart="@dimen/dimension10dp"
+            android:layout_marginLeft="@dimen/dimension10dp"
+            android:layout_marginTop="@dimen/dimension10dp"
+            android:layout_marginEnd="@dimen/dimension10dp"
+            android:layout_marginRight="@dimen/dimension10dp"
             android:background="#00000000"
-            >
+            android:src="@drawable/website">
             ></ImageView>
         <TextView
             android:id="@+id/txtName"
@@ -39,12 +43,22 @@ android:background="#00000000"
             android:id="@+id/txtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="Address\nAddress"
+            android:textColor="@color/colorSkyBlue"
+            android:text="Address"
             android:textSize="@dimen/dimension18dp"
             android:layout_toRightOf="@+id/imgProfile"
             android:layout_below="@+id/txtName"
             android:layout_centerVertical="true"
+            ></TextView>
+        <TextView
+            android:id="@+id/txtShort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlackGray"
+            android:text=""
+            android:textSize="@dimen/dimension17dp"
+            android:layout_toRightOf="@+id/imgProfile"
+            android:layout_below="@+id/txtAddress"
             ></TextView>
 
         <ImageView
@@ -53,6 +67,7 @@ android:background="#00000000"
             android:layout_height="@dimen/dimension30dp"
             android:layout_alignParentRight="true"
             android:src="@drawable/user_check"
+            android:visibility="gone"
             >
             ></ImageView>
     </RelativeLayout>
@@ -70,6 +85,19 @@ android:background="#00000000"
         android:layout_below="@+id/view"
         android:layout_margin="@dimen/dimension10dp"
         >
+        <TextView
+            android:id="@+id/txtSpend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="$10"
+            android:drawableLeft="@drawable/resize_price_icon"
+            android:drawablePadding="@dimen/dimension5dp"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_marginLeft="@dimen/dimension3dp"
+            android:layout_marginRight="@dimen/dimension3dp"
+            android:gravity="center_vertical"
+            ></TextView>
     <TextView
         android:id="@+id/txtDistance"
         android:layout_width="match_parent"
@@ -82,6 +110,7 @@ android:background="#00000000"
         android:layout_marginLeft="@dimen/dimension3dp"
         android:layout_marginRight="@dimen/dimension3dp"
         android:gravity="center_vertical"
+        android:layout_below="@+id/txtSpend"
         ></TextView>
     <TextView
         android:id="@+id/txtTime"
@@ -113,6 +142,21 @@ android:background="#00000000"
         android:layout_marginTop="@dimen/dimension1dp"
         android:gravity="center_vertical"
         ></TextView>
+        <TextView
+            android:id="@+id/txtWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:text="3 min away"
+            android:drawableLeft="@drawable/resize_www_icon"
+            android:drawablePadding="@dimen/dimension5dp"
+            android:textSize="@dimen/dimension16dp"
+            android:layout_below="@+id/txtService"
+            android:layout_marginLeft="@dimen/dimension3dp"
+            android:layout_marginRight="@dimen/dimension3dp"
+            android:layout_marginTop="@dimen/dimension1dp"
+            android:gravity="center_vertical"
+            ></TextView>
 
     </RelativeLayout>
 </RelativeLayout>

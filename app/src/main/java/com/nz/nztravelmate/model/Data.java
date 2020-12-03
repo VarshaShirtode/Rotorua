@@ -16,10 +16,21 @@ public class Data implements Serializable {
     String category_id="";
 
     String avg_time="";
-    String avg_doller="";
+    String avg_dollar="";
     String business_hrs="";
     String wifi="";
     String map="";
+
+    public String getShort_description() {
+        return short_description;
+    }
+
+    public void setShort_description(String short_description) {
+        this.short_description = short_description;
+    }
+
+    String short_description="";
+
     private List<Payment> payment_id = new ArrayList<>();
 
     public List<Payment> getPayment_id() {
@@ -129,11 +140,11 @@ public class Data implements Serializable {
     }
 
     public String getAvg_doller() {
-        return avg_doller;
+        return avg_dollar;
     }
 
-    public void setAvg_doller(String avg_doller) {
-        this.avg_doller = avg_doller;
+    public void setAvg_doller(String avg_dollar) {
+        this.avg_dollar = avg_dollar;
     }
 
     public String getBusiness_hrs() {
@@ -160,13 +171,7 @@ public class Data implements Serializable {
         this.parking = parking;
     }
 
-    public String getMandarin_speaking_staff() {
-        return mandarin_speaking_staff;
-    }
 
-    public void setMandarin_speaking_staff(String mandarin_speaking_staff) {
-        this.mandarin_speaking_staff = mandarin_speaking_staff;
-    }
 
     public String getPayment() {
         return payment;
@@ -218,7 +223,15 @@ public class Data implements Serializable {
 
     String parking="";
 
-    String mandarin_speaking_staff="";
+    public String getStaff() {
+        return staff;
+    }
+
+    public void setStaff(String staff) {
+        this.staff = staff;
+    }
+
+    String staff="";
     String payment="";
     String logo="";
     String images="";

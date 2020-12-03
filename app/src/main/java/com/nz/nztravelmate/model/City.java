@@ -1,6 +1,7 @@
 package com.nz.nztravelmate.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class City implements Serializable {
     public String getMap() {
@@ -52,4 +53,13 @@ public class City implements Serializable {
         this.name = name;
     }
 
+    public ArrayList<CityDetails> getCity_details() {
+        return city_details;
+    }
+
+    public void setCity_details(ArrayList<CityDetails> city_details) {
+        this.city_details = city_details;
+    }
+
+    ArrayList<CityDetails> city_details=new ArrayList<CityDetails>();
 }

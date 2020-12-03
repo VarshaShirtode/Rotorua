@@ -53,6 +53,7 @@ public class FragmentBusiness extends Fragment {
     ImageView imgTab;
 
     public FragmentBusiness(String category_id) {
+
         this.category_id=category_id;
     }
 
@@ -146,9 +147,18 @@ public class FragmentBusiness extends Fragment {
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
 
+
+
         Map<String,String> params = new HashMap<String, String>();
-        params.put("city_id", preferences.getString(PrefConstants.CITY_ID));
+       params.put("city_id", preferences.getString(PrefConstants.CITY_ID));
         params.put("category_id", category_id);
+        params.put("language_id", ""+preferences.getInt(PrefConstants.LANGUAGE_ID));
+        Log.v("@RESP","Request "+" city_id="+preferences.getString(PrefConstants.CITY_ID)+" category_id="+category_id+" language_id="+preferences.getInt(PrefConstants.LANGUAGE_ID));
+
+       /* params.put("city_id",""+ 8);
+        params.put("category_id",""+ 8);
+        params.put("language_id",""+ 1);*/
+
 
         ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
         Call<UserResponse> call = apiService.getBusinessDetails(params);

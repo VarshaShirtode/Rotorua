@@ -55,7 +55,7 @@ Context context;
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         City food=cityList.get(position);
        //final City myListData = listdata[position];
-        holder.txtName.setText(food.getName());
+        holder.txtName.setText(food.getCity_details().get(0).getName());
         if (food.getImage() != null) {
             loadImage(holder.imgCity, food.getImage());
         } else {
@@ -68,7 +68,7 @@ Context context;
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(),"click on item: "+cityList.get(position).getName(),Toast.LENGTH_LONG).show();
+               // Toast.makeText(view.getContext(),"click on item: "+cityList.get(position).getName(),Toast.LENGTH_LONG).show();
                     Intent intent=new Intent(view.getContext(), SplashActivity.class);
                     intent.putExtra("CityObject",food);
                     view.getContext().startActivity(intent);

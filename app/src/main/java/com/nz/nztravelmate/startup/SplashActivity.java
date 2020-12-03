@@ -83,18 +83,19 @@ public class SplashActivity extends AppCompatActivity {
 
 
        // txtMainTitle.setText(getResources().getString(R.string.app_name));
-        txtCity.setText(city.getName());
-        txtMainTitle.setText(city.getName());
+        txtCity.setText(city.getCity_details().get(0).getName());
+        txtMainTitle.setText(city.getCity_details().get(0).getName());
         if (city.getDescription()!=null)
         {
-            txtDescription.setText(city.getDescription());
+            txtDescription.setText(city.getCity_details().get(0).getDescription());
         }else{
             txtDescription.setText("");
         }
         //txtVisit.setText(Html.fromHtml("<small>Visit</small>")+"\n"+city.getName());
-        txtVisit.setText(Html.fromHtml("<small>Visit</small><br>"+city.getName()));
-        preferences.putString(PrefConstants.CITY_NAME,city.getName());
-        preferences.putString(PrefConstants.CITY_ID,city.getId());
+
+        txtVisit.setText(Html.fromHtml("<small>"+getResources().getString(R.string.Visit)+"</small><br>"+city.getCity_details().get(0).getName()));
+        preferences.putString(PrefConstants.CITY_NAME,city.getCity_details().get(0).getName());
+        preferences.putString(PrefConstants.CITY_ID,city.getCity_details().get(0).getCity_id());
         preferences.putString(PrefConstants.CITY_MAP,city.getMap());
 
         /*preferences.putString(PrefConstants.CITY_MAP,"18.5204° N, 73.8567° E");
@@ -158,7 +159,7 @@ public class SplashActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
 
         ApiService apiService = RetrofitClient.getClient(context).create(ApiService.class);
-        Call<UserResponse> call = apiService.getCategoryList();
+        Call<UserResponse> call = apiService.getCategoryList(""+preferences.getInt(PrefConstants.LANGUAGE_ID));
         call.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {

@@ -22,6 +22,7 @@ import com.google.gson.reflect.TypeToken;
 import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.dashboard.PagerAdapter;
 import com.nz.nztravelmate.model.Category;
+import com.nz.nztravelmate.model.CategoryDetails;
 import com.nz.nztravelmate.model.UserResponse;
 import com.nz.nztravelmate.utils.PrefConstants;
 import com.nz.nztravelmate.utils.Preferences;
@@ -50,7 +51,7 @@ public class FragmentAttraction extends Fragment {
     Preferences preferences;
     ArrayList<Category> categoryList;
     int images[]=new int[]{R.drawable.resize,R.drawable.splash_lake,R.drawable.lake_rotorua,R.drawable.rsz_splash};
-
+    ArrayList<CategoryDetails> categoryDetails;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -82,14 +83,30 @@ public class FragmentAttraction extends Fragment {
         String json =preferences.getString(PrefConstants.CATEGORY_LIST);
         Type type = new TypeToken<List<Category>>() {}.getType();
         categoryList = gson.fromJson(json, type);
+        Log.v("@RESP","CAT "+categoryList.size());
+
         if(categoryList.size()!=0) {
             for (int i = 0; i < 4; i++) {
-                tabLayout.addTab(tabLayout.newTab().setText(categoryList.get(i).getName()));//Luxury and Duty Fee
+                if (!categoryList.get(i).getCategory_details().isEmpty())
+                {
+                     categoryDetails=categoryList.get(i).getCategory_details();
+                   for (int j=0;j<categoryDetails.size();j++)
+                    {
+                        Log.v("@RESP","CAT "+categoryDetails.get(j).getName());
+                        tabLayout.addTab(tabLayout.newTab().setText(categoryDetails.get(j).getName()));//Luxury and Duty Fee
+                    }
+                }
+             //   Log.v("@RESP","CAT "+categoryList.get(i).getName());
+             //   tabLayout.addTab(tabLayout.newTab().setText(categoryList.get(i).getName()));//Luxury and Duty Fee
             }
         }
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
-
+        //tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        if (preferences.getInt(PrefConstants.LANGUAGE_ID)==1) {
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        }else if (preferences.getInt(PrefConstants.LANGUAGE_ID)==2) {
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        }
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         if (categoryList.get(0).getImage() != null) {
             loadImage(imgTab, categoryList.get(0).getImage());
         }
