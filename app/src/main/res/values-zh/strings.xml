@@ -3,7 +3,7 @@
     <string name="app_name">新西兰旅行伙伴</string>
     <string name="headerTitle">新西兰旅行伙伴</string>
     <string name="splashdescription">"丁p礼品测试券 a rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua "</string>
-    <string name="splashEntryButton">让我们来指导</string>
+    <string name="splashEntryButton">让我们探索</string>
     <string name="splashVisitRotorua"><html><small>访问</small> \n</html>ROTORUA</string>
     <string name="splashEPayment"><html>\n</html>丁p礼品测试券 </string>
     <string name="selectacity">丁p礼品测试券 </string>
@@ -35,5 +35,7 @@
     <string name="permissionmessage">您需要通过应用权限设置授予“电话”权限才能拨打电话，\n是否要继续授予该权限？</string>
     <string name="OK">好</string>
     <string name="Cancel">取消</string>
+    <string name="InterNetMessage">网络错误, 请检查您的互联网连接</string>
+    <string name="InternetTitle">网络错误</string>
 
 </resources>

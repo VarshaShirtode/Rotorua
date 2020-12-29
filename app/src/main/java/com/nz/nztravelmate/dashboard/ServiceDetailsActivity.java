@@ -42,6 +42,7 @@ import com.nz.nztravelmate.model.Data;
 import com.nz.nztravelmate.startup.LanguageSelectionActivity;
 import com.nz.nztravelmate.utils.LocaleManager;
 import com.nz.nztravelmate.utils.PrefConstants;
+import com.nz.nztravelmate.utils.Preferences;
 import com.nz.nztravelmate.webservice.ApiConstants;
 import com.squareup.picasso.Picasso;
 
@@ -52,6 +53,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
     private static final int PERMISSION_REQUEST_CODE =188 ;
     Context context=this;
     TabLayout tabLayout;
+    Preferences preferences;
     FragmentIntroduction fragmentDetail;
     FragmentDiscount fragmentDiscount;
     FragmentManager fragmentManager;
@@ -64,6 +66,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
     static Data food;
     ImageView imgBack,imgCall,imgLocation,imgTab;
     TextView txtTitle;
+    TextView txtPayment,txtWifi,txtParking,txtStaff;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -74,6 +77,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_details);
+        preferences=new Preferences(context);
         initUI();
         initFragment();
         initListner();
@@ -138,7 +142,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         txtAddress=findViewById(R.id.txtAddress);
         txtDistance=findViewById(R.id.txtDistance);
         txtTime=findViewById(R.id.txtTime);
-        txtService=findViewById(R.id.txtService);
+        //txtService=findViewById(R.id.txtService);
         txtStatus=findViewById(R.id.txtStatus);
         txtShort=findViewById(R.id.txtShort);
         imgBack=findViewById(R.id.imgBack);
@@ -149,6 +153,10 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         txtWebsite=findViewById(R.id.txtWebsite);
         txtSpend=findViewById(R.id.txtSpend);
 
+        txtPayment = (TextView) findViewById(R.id.txtPayment);
+        txtWifi= (TextView) findViewById(R.id.txtWifi);
+        txtParking= (TextView) findViewById(R.id.txtParking);
+        txtStaff =(TextView) findViewById(R.id.txtStaff);
 
 //GetData from list and display
         food=new Data();
@@ -163,9 +171,14 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
             String styledText = "<span style=color:red>"+food.getWebsite()+"</span>";
             txtWebsite.setText(context.getResources().getString(R.string.Website)+" : "+Html.fromHtml(styledText),TextView.BufferType.SPANNABLE);
             Spannable sText = (Spannable) txtWebsite.getText();
-            sText.setSpan(new ForegroundColorSpan(Color.BLUE), 10, sText.length(), 0);
-        }
-        if (!food.getAvg_doller().equals("")) {
+            if (preferences.getInt(PrefConstants.LANGUAGE_ID)==1)
+            {
+                sText.setSpan(new ForegroundColorSpan(Color.BLUE), 10, sText.length(), 0);
+            }else{
+                sText.setSpan(new ForegroundColorSpan(Color.BLUE), 5, sText.length(), 0);
+            }
+       }
+        if (food.getAvg_doller()!=null&&!food.getAvg_doller().equals("")) {
             txtSpend.setText(context.getResources().getString(R.string.Spend)+" : "+food.getAvg_doller());
         }
 
@@ -189,17 +202,161 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
             name=name.replace("<p>","");
             name=name.replace("</p>","");
             txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+name);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+Html.fromHtml(name, Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+Html.fromHtml(name));
+            }
+
         }
 
+        if (!food.getPayment_id().isEmpty())
+        {
+            String payment =context.getResources().getString(R.string.Payment) + " : " ;
+            String Service="";
+            for (int i=0;i<food.getPayment_id().size();i++)
+            {
+                Service = Service+ food.getPayment_id().get(i).getName()+ ", ";
+            }
+            if (!Service.equals(""))
+            {
+                char e=Service.charAt(Service.length()-1);
+                if (e==' ')
+                {
+                    Service=Service.substring(0,Service.length()-2);
+                }
+                txtPayment.setText(payment+Service);
+            }else{
+                txtPayment.setText(payment);
+            }
+
+        }else{
+            txtPayment.setText(context.getResources().getString(R.string.Payment) + " : ");
+        }
+
+        if (food.getWifi()!=null||!food.getWifi().equals("")) {
+            String data = food.getWifi();
+            String Service="";
+            if (!data.equals("")) {
+                if (data.equals(","))
+                {
+                    Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No);
+                }
+                else
+                {
+                    String available = data.substring(0, 1);
+
+                    if (available.equals("1")) {
+                        if (data.length() != 1&&!data.endsWith(",")) {
+                            String msg = data.substring(2, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes);
+                        }
+                    } else {
+                        if (data.length() != 1) {
+                            String msg = data.substring(1, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No);
+                        }
+                    }
+
+                }
+                txtWifi.setText(Service);
+            }else{
+                txtWifi.setText(context.getResources().getString(R.string.Free_Wifi) + " : ");
+            }
+
+        }else{
+            txtWifi.setText(context.getResources().getString(R.string.Free_Wifi) + " : ");
+        }
+
+        if (food.getParking()!=null||!food.getParking().equals(""))
+        {
+            String data=food.getParking();
+            String Service="";
+            if (!data.equals("")) {
+                if (data.equals(","))
+                {
+                    Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No);
+                }
+                else {
+                    String available = data.substring(0, 1);
+
+                    if (available .equals("1")) {
+                        if (data.length() != 1&&!data.endsWith(",")) {
+                            String msg = data.substring(2, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes);
+                        }
+                    } else {
+                        if (data.length() != 1) {
+                            String msg = data.substring(1, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No);
+                        }
+                    }
+                }
+                txtParking.setText(Service);
+            }else{
+                txtParking.setText(context.getResources().getString(R.string.Free_Parking) + " : ");
+            }
+
+        }else{
+            txtParking.setText(context.getResources().getString(R.string.Free_Parking) + " : ");
+        }
+
+        if (food.getStaff()!=null||!food.getStaff().equals(""))
+        {
+            String data=food.getStaff();
+            String Service="";
+            if (!data.equals("")) {
+                if (data.equals(","))
+                {
+                    Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No);
+                }
+                else {
+                    String available = data.substring(0, 1);
+
+                    if (available .equals("1")) {
+                        if (data.length() != 1&&!data.endsWith(",")) {
+                            String msg = data.substring(2, data.length());
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes);
+                        }
+                    } else {
+                        if (data.length() != 1) {
+                            String msg = data.substring(1, data.length());
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No);
+                        }
+                    }
+                }
+                txtStaff.setText(Service);
+            }else{
+                txtStaff.setText(context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : ");
+            }
+
+        }else{
+            txtStaff.setText(context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : ");
+        }
+
+
+/*
         String Service="";
 
-        /*if (food.getPayment()!=null)
+        *//*if (food.getPayment()!=null)
         {
             // Service = Service+"Payment" + " : " + food.getPayment()+ "\n";
             String data=food.getPayment();
             int available= Integer.parseInt(data.substring(0,1));
             if (data.equals("1"))
-            {*/
+            {*//*
         if (!food.getPayment_id().isEmpty())
         {
             Service = Service+ context.getResources().getString(R.string.Payment) + " : " ;
@@ -223,7 +380,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
 
         }
         //   }
-           /* if (available==1)
+           *//* if (available==1)
             {
                 if (data.length()!=1) {
                     String msg = data.substring(2, data.length() - 1);
@@ -239,7 +396,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
                 }else{
                     Service =Service+ "Payment" + " : " + "No"+ "\n";
                 }
-            }*/
+            }*//*
         // }
         if (food.getWifi()!=null) {
             String data = food.getWifi();
@@ -310,7 +467,7 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
         if (!Service.equals(""))
         {
             Service=Service.trim();
-            /*char s=Service.charAt(0);
+            *//*char s=Service.charAt(0);
             char e=Service.charAt(Service.length()-1);
             if (s==' ')
             {
@@ -319,11 +476,11 @@ public class ServiceDetailsActivity extends AppCompatActivity implements View.On
             if (e==' ')
             {
                 Service=Service.substring(0,Service.length()-3);
-            }*/
+            }*//*
             txtService.setText(Service);
         }else{
             txtService.setText(context.getResources().getString(R.string.NoService));
-        }
+        }*/
 
         if (food.getImages()!=null) {
             loadImage(imgTab, food.getImages());

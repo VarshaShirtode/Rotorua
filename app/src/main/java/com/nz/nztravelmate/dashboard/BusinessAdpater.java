@@ -15,13 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.model.Data;
+import com.nz.nztravelmate.utils.PrefConstants;
+import com.nz.nztravelmate.utils.Preferences;
 import com.nz.nztravelmate.webservice.ApiConstants;
 import com.squareup.picasso.Picasso;
 
@@ -30,9 +31,18 @@ import java.util.ArrayList;
 public class BusinessAdpater extends RecyclerView.Adapter<BusinessAdpater.ViewHolder> {
 Context context;
     ArrayList<Data> foodlist;
+    Preferences preferences;
+    ArrayList<String> locationList;
     public BusinessAdpater(Context context, ArrayList<Data> foodlist) {
         this.context=context;
         this.foodlist=foodlist;
+        preferences=new Preferences(context);
+        locationList=new ArrayList<>();
+       for(int i=0;i<foodlist.size();i++)
+       {
+           locationList.add(foodlist.get(i).getMap());
+       }
+       //Toast.makeText(context,""+locationList.size(),Toast.LENGTH_SHORT).show();
     }
 
     @NonNull
@@ -47,18 +57,37 @@ Context context;
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Data food=foodlist.get(position);
-
+       // Log.v("@RESP","Foodlist "+position);
        //final Data myListData = listdata[position];
         holder.txtName.setText(food.getName());
+        /*holder.txtName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (food.getMap()!=null)
+                {
+                    Intent intent=new Intent(context, MapsActivity.class);
+                    intent.putExtra("LATLONG",food.getMap());
+                    intent.putExtra("LABEL",food.getName());
+
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context, "Location is not available", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
         holder.txtAddress.setText(food.getAddress());
         holder.txtShort.setText(food.getShort_description());
-        if (!food.getWebsite().equals("")) {
+        if (food.getWebsite()!=null&&!food.getWebsite().equals("")) {
             String styledText = "<span style=color:red>"+food.getWebsite()+"</span>";
             holder.txtWebsite.setText(context.getResources().getString(R.string.Website)+" : "+Html.fromHtml(styledText),TextView.BufferType.SPANNABLE);
             Spannable sText = (Spannable) holder.txtWebsite.getText();
-            sText.setSpan(new ForegroundColorSpan(Color.BLUE), 10, sText.length(), 0);
-        }
-        if (!food.getAvg_doller().equals("")) {
+            if (preferences.getInt(PrefConstants.LANGUAGE_ID)==1)
+            {
+                sText.setSpan(new ForegroundColorSpan(Color.BLUE), 10, sText.length(), 0);
+            }else{
+                sText.setSpan(new ForegroundColorSpan(Color.BLUE), 5, sText.length(), 0);
+            } }
+        if (food.getAvg_doller()!=null&&!food.getAvg_doller().equals("")) {
             holder.txtSpend.setText(context.getResources().getString(R.string.Spend)+" : "+food.getAvg_doller());
         }
         holder.txtWebsite.setOnClickListener(new View.OnClickListener() {
@@ -94,21 +123,18 @@ Context context;
             name=name.replace("<p>","");
             name=name.replace("</p>","");
             holder.txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+name);
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                holder.txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+Html.fromHtml(name, Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                holder.txtTime.setText(context.getResources().getString(R.string.OperatedTime)+" : "+Html.fromHtml(name));
+            }
         }
-        String Service="";
 
-        /*if (food.getPayment()!=null)
-        {
-            // Service = Service+"Payment" + " : " + food.getPayment()+ "\n";
-            String data=food.getPayment();
-            int available= Integer.parseInt(data.substring(0,1));
-            if (data.equals("1"))
-            {*/
+
         if (!food.getPayment_id().isEmpty())
         {
-            Service = Service+ context.getResources().getString(R.string.Payment) + " : " ;
-
+            String payment =context.getResources().getString(R.string.Payment) + " : " ;
+            String Service="";
             for (int i=0;i<food.getPayment_id().size();i++)
             {
                 Service = Service+ food.getPayment_id().get(i).getName()+ ", ";
@@ -120,114 +146,127 @@ Context context;
                 {
                     Service=Service.substring(0,Service.length()-2);
                 }
+                holder.txtPayment.setText(payment+Service);
+            }else{
+                holder.txtPayment.setText(payment);
             }
-            Service = Service+ "\n" ;
 
         }else{
-            // Service = Service+ "Payment" + " : " + "Yes"+ "\n";
-
+            holder.txtPayment.setText(context.getResources().getString(R.string.Payment) + " : ");
         }
-         //   }
-           /* if (available==1)
-            {
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Payment"+ " : " + "Yes," + msg + "\n";
-                }else{
 
-                    Service = Service+ "Payment" + " : " + "Yes"+ "\n";
-                }
-            }else{
-                if (data.length()!=1) {
-                    String msg = data.substring(2, data.length() - 1);
-                    Service =Service+ "Payment" + " : " + "No," + msg + "\n";
-                }else{
-                    Service =Service+ "Payment" + " : " + "No"+ "\n";
-                }
-            }*/
-       // }
-        if (food.getWifi()!=null) {
+        if (food.getWifi()!=null||!food.getWifi().equals("")) {
             String data = food.getWifi();
+            String Service="";
             if (!data.equals("")) {
-                int available = Integer.parseInt(data.substring(0, 1));
-                if (available == 1) {
-                    if (data.length() != 1) {
-                        String msg = data.substring(2, data.length());
-                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg + "\n";
-                    } else {
-                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes) + "\n";
-                    }
-                } else {
-                    if (data.length() != 1) {
-                        String msg = data.substring(2, data.length());
-                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No) + ", " + msg + "\n";
-                    } else {
-                        Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No) + "\n";
-                    }
+                if (data.equals(","))
+                {
+                    Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No);
                 }
+                else
+                {
+                    String available = data.substring(0, 1);
+
+                    if (available.equals("1")) {
+                        if (data.length() != 1&&!data.endsWith(",")) {
+                            String msg = data.substring(2, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.Yes);
+                        }
+                    } else {
+                        if (data.length() != 1) {
+                            String msg = data.substring(1, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Wifi) + " : " + context.getResources().getString(R.string.No);
+                        }
+                    }
+
+                }
+                holder.txtWifi.setText(Service);
+            }else{
+                holder.txtWifi.setText(context.getResources().getString(R.string.Free_Wifi) + " : ");
             }
+
+        }else{
+            holder.txtWifi.setText(context.getResources().getString(R.string.Free_Wifi) + " : ");
         }
-        if (food.getParking()!=null)
+
+        if (food.getParking()!=null||!food.getParking().equals(""))
         {
             String data=food.getParking();
+            String Service="";
             if (!data.equals("")) {
-                int available = Integer.parseInt(data.substring(0, 1));
-                if (available == 1) {
-                    if (data.length() != 1) {
-                        String msg = data.substring(2, data.length());
-                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg + "\n";
+                if (data.equals(","))
+                {
+                    Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No);
+                }
+                else {
+                    String available = data.substring(0, 1);
+
+                    if (available .equals("1")) {
+                        if (data.length() != 1&&!data.endsWith(",")) {
+                            String msg = data.substring(2, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes);
+                        }
                     } else {
-                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.Yes) + "\n";
-                    }
-                } else {
-                    if (data.length() != 1) {
-                        String msg = data.substring(2, data.length());
-                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No) + ", " + msg + "\n";
-                    } else {
-                        Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No) + "\n";
+                        if (data.length() != 1) {
+                            String msg = data.substring(1, data.length());
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Free_Parking) + " : " + context.getResources().getString(R.string.No);
+                        }
                     }
                 }
+                holder.txtParking.setText(Service);
+            }else{
+                holder.txtParking.setText(context.getResources().getString(R.string.Free_Parking) + " : ");
             }
+
+        }else{
+            holder.txtParking.setText(context.getResources().getString(R.string.Free_Parking) + " : ");
         }
-        if (food.getStaff()!=null)
+
+        if (food.getStaff()!=null||!food.getStaff().equals(""))
         {
             String data=food.getStaff();
-         if (!data.equals("")) {
-             int available = Integer.parseInt(data.substring(0, 1));
-             if (available == 1) {
-                 if (data.length() != 1) {
-                     String msg = data.substring(2, data.length());
-                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg + "\n";
-                 } else {
-                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes) + "\n";
-                 }
-             } else {
-                 if (data.length() != 1) {
-                     String msg = data.substring(2, data.length());
-                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No) + ", " + msg + "\n";
-                 } else {
-                     Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No) + "\n";
-                 }
-             }
-         }
-        }
-        if (!Service.equals(""))
-        {
-            Service=Service.trim();
-            /*char s=Service.charAt(0);
-            char e=Service.charAt(Service.length()-1);
-            if (s==' ')
-            {
-                Service=Service.substring(3);
+            String Service="";
+            if (!data.equals("")) {
+                if (data.equals(","))
+                {
+                    Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No);
+                }
+                else {
+                    String available = data.substring(0, 1);
+
+                    if (available .equals("1")) {
+                        if (data.length() != 1&&!data.endsWith(",")) {
+                            String msg = data.substring(2, data.length());
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.Yes);
+                        }
+                    } else {
+                        if (data.length() != 1) {
+                            String msg = data.substring(1, data.length());
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No) + ", " + msg;
+                        } else {
+                            Service = Service + context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : " + context.getResources().getString(R.string.No);
+                        }
+                    }
+                }
+                holder.txtStaff.setText(Service);
+            }else{
+                holder.txtStaff.setText(context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : ");
             }
-            if (e==' ')
-            {
-                Service=Service.substring(0,Service.length()-3);
-            }*/
-            holder.txtService.setText(Service);
+
         }else{
-            holder.txtService.setText(context.getResources().getString(R.string.NoService));
+            holder.txtStaff.setText(context.getResources().getString(R.string.Mandarin_Speaking_Staff) + " : ");
         }
+
 
       if (food.getLogo()!=null) {
             loadImage(holder.imgProfile, food.getLogo());
@@ -262,6 +301,7 @@ Context context;
         public ImageView imgProfile,imgRight;
         public TextView txtName,txtAddress,txtDistance,txtTime,txtService,txtShort,txtSpend,txtWebsite;
         public RelativeLayout relativeLayout;
+        TextView txtPayment,txtWifi,txtParking,txtStaff;
         public ViewHolder(View itemView) {
             super(itemView);
             this.imgProfile = (ImageView) itemView.findViewById(R.id.imgProfile);
@@ -272,8 +312,12 @@ Context context;
             this.txtShort = (TextView) itemView.findViewById(R.id.txtShort);
             this.txtTime= (TextView) itemView.findViewById(R.id.txtTime);
             this.txtWebsite= (TextView) itemView.findViewById(R.id.txtWebsite);
-            this.txtService =(TextView) itemView.findViewById(R.id.txtService);
+           // this.txtService =(TextView) itemView.findViewById(R.id.txtService);
             this.relativeLayout =(RelativeLayout) itemView.findViewById(R.id.relativeLayout);
+            this.txtPayment = (TextView) itemView.findViewById(R.id.txtPayment);
+            this.txtWifi= (TextView) itemView.findViewById(R.id.txtWifi);
+            this.txtParking= (TextView) itemView.findViewById(R.id.txtParking);
+            this.txtStaff =(TextView) itemView.findViewById(R.id.txtStaff);
         }
     }
 }

@@ -1,21 +1,15 @@
 package com.nz.nztravelmate.webservice;
-import com.google.gson.JsonObject;
-import com.nz.nztravelmate.model.Params;
+
 import com.nz.nztravelmate.model.UserResponse;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 public interface ApiService {
 
@@ -26,6 +20,9 @@ public interface ApiService {
 
     @POST(ApiConstants.GET_CITY)
     Call<UserResponse> getCityList(@Query("language_id") String language_id);
+
+    @POST(ApiConstants.GET_BANNER)
+    Call<UserResponse> getBannerList();
 
     @POST(ApiConstants.GET_CATEGORY)
     Call<UserResponse> getCategoryList(@Query("language_id") String language_id);

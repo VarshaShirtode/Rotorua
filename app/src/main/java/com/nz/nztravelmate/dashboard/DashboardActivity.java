@@ -1,10 +1,5 @@
 package com.nz.nztravelmate.dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +8,14 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.material.tabs.TabLayout;
 import com.nz.nztravelmate.R;
-//import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
-import com.nz.nztravelmate.map.MapsActivity;
+import com.nz.nztravelmate.model.Banner;
 import com.nz.nztravelmate.model.Category;
 import com.nz.nztravelmate.startup.FragmentAttraction;
 import com.nz.nztravelmate.utils.LocaleManager;
@@ -24,6 +23,8 @@ import com.nz.nztravelmate.utils.PrefConstants;
 import com.nz.nztravelmate.utils.Preferences;
 
 import java.util.ArrayList;
+
+//import com.nz.nztravelmate.dashboard.accommodation.FragmentAccommodation;
 
 public class DashboardActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
@@ -35,6 +36,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     ArrayList<Category> categoryList;
+    ArrayList<Banner> bannerList;
     TextView txtTitle;
     Preferences preferences;
 
@@ -57,6 +59,7 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         initUI();
         initFragment();
         initListner();
+
       /*  tabLayout= (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("SERVICE"));//Luxury and Duty Fee
         tabLayout.addTab(tabLayout.newTab().setText("MAP"));// Food And Drink
@@ -100,6 +103,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
         txtProfile = findViewById(R.id.txtProfile);
 
     }
+
+
 
     private void initFragment() {
         fragmentManager = getSupportFragmentManager();
@@ -151,10 +156,10 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.txtMap:
               //  callFragment("MAP",fragmentAccommodation);
-                Intent intent=new Intent(DashboardActivity.this, MapsActivity.class);
+              /*  Intent intent=new Intent(DashboardActivity.this, MapsActivity.class);
                 intent.putExtra("LATLONG",preferences.getString(PrefConstants.CITY_MAP));
                 intent.putExtra("LABEL",preferences.getString(PrefConstants.CITY_NAME));
-                startActivity(intent);
+                startActivity(intent);*/
                 break;
             case R.id.txtProfile:
                 break;

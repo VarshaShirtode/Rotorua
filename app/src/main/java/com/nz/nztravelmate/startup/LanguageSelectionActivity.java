@@ -1,10 +1,5 @@
 package com.nz.nztravelmate.startup;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,17 +10,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.utils.LocaleManager;
 import com.nz.nztravelmate.utils.PrefConstants;
 import com.nz.nztravelmate.utils.Preferences;
 
-import java.util.Locale;
-
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.CALL_PHONE;
-import static android.Manifest.permission_group.CAMERA;
 
 public class LanguageSelectionActivity extends AppCompatActivity {
 Context context=this;
@@ -43,6 +39,7 @@ Preferences preferences;
         setContentView(R.layout.activity_language_selection);
         preferences=new Preferences(context);
         initUI();
+        //throw new RuntimeException("Test Crash"); // Force a crash
        // accessPermission();
       //  if (!checkPermission()) {
             requestPermission();
@@ -60,6 +57,7 @@ Preferences preferences;
     private void initUI() {
         btnChinese=findViewById(R.id.btnChinese);
         btnEnglish=findViewById(R.id.btnEnglish);
+
 
         btnChinese.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,8 +105,11 @@ Preferences preferences;
                     boolean cameraAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
                     if (locationAccepted && cameraAccepted)
+                    {
+
+                    }
                        // Snackbar.make(LanguageSelectionActivity.this, "Permission Granted, Now you can access location data and camera.", Snackbar.LENGTH_LONG).show();
-                    Toast.makeText(context,"Permission Granted, Now you can access location data and call.",Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(context,"Permission Granted, Now you can access location data and call.",Toast.LENGTH_SHORT).show();
                     else {
                      // requestPermission();
                         Toast.makeText(context,"Permission Denied, You cannot access location data and call.",Toast.LENGTH_SHORT).show();

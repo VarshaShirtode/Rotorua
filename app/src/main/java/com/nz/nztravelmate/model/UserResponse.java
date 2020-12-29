@@ -36,12 +36,23 @@ public class UserResponse {
         return city;
     }
 
+
     public void setCity(List<City> city) {
         this.city = city;
     }
 
     private String message = "";
     private List<City> city = new ArrayList<>();
+
+    public List<Banner> getBanners() {
+        return Banners;
+    }
+
+    public void setBanners(List<Banner> banners) {
+        Banners = banners;
+    }
+
+    private List<Banner> Banners = new ArrayList<>();
 
 
     public List<Category> getCategory() {
@@ -63,4 +74,7 @@ public class UserResponse {
     }
 
     private List<Data> Data = new ArrayList<>();
+
+
+
 }

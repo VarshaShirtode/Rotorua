@@ -2,7 +2,7 @@
     <string name="app_name">NzTravelMate</string>
     <string name="headerTitle">NzTravelMate</string>
     <string name="splashdescription">"rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua rotorua "</string>
-    <string name="splashEntryButton">Let us guide</string>
+    <string name="splashEntryButton">Let us explore</string>
     <string name="splashVisitRotorua"><html><small>Visit</small> \n</html>ROTORUA</string>
     <string name="splashEPayment"><html>\n</html>ePayments</string>
     <string name="selectacity">Select a City</string>
@@ -34,5 +34,7 @@
     <string name="permissionmessage">"You need to grant Telephone permission from app permission setting for make a call,\n Do you want continue to grant the permission?</string>
     <string name="OK">Ok</string>
     <string name="Cancel">Cancel</string>
+    <string name="InterNetMessage">Network Error, Check your internet connection</string>
+    <string name="InternetTitle">Network Error</string>
 
 </resources>

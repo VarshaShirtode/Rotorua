@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "314474064280",
+    "project_id": "nztravelmate",
+    "storage_bucket": "nztravelmate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314474064280:android:0cc45d2fc0f674283fa3ed",
+        "android_client_info": {
+          "package_name": "com.nz.nztravelmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314474064280-2qmdjm9sscg1jl4nip2ndn9prcbcleh9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCPcN0g-NqMPJ5N7EAD6SU7BVC1oaf3jg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314474064280-2qmdjm9sscg1jl4nip2ndn9prcbcleh9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

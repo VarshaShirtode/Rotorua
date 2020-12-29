@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.model.Category;
 import com.nz.nztravelmate.model.Data;
 import com.nz.nztravelmate.model.UserResponse;
+import com.nz.nztravelmate.utils.NetworkUtils;
 import com.nz.nztravelmate.utils.PrefConstants;
 import com.nz.nztravelmate.utils.Preferences;
 import com.nz.nztravelmate.webservice.ApiService;
@@ -47,14 +49,18 @@ public class FragmentBusiness extends Fragment {
     ArrayList<Category> categoryList;
     //Overriden method onCreateView
     Preferences preferences;
+    TextView txtMap;
 
     Category category;
     String category_id="";
     ImageView imgTab;
+    ArrayList<String> locationList;
 
     public FragmentBusiness(String category_id) {
 
         this.category_id=category_id;
+        //preferences=new Preferences(getActivity());
+
     }
 
     @Override
@@ -62,6 +68,7 @@ public class FragmentBusiness extends Fragment {
         super.onAttach(context);
         this.context=getActivity();
         preferences=new Preferences(this.context);
+
     }
 
    /* @Override
@@ -84,11 +91,11 @@ public class FragmentBusiness extends Fragment {
         return rootView;
     }
 
-    @Override
+    /*@Override
     public void onResume() {
         super.onResume();
-
-    }
+getData();
+    }*/
 
    /* private void loadImage(ImageView profileImageView, String imagePath) {
        // String filePath = ApiConstants.GET_IMAGE + imagePath;
@@ -109,10 +116,21 @@ public class FragmentBusiness extends Fragment {
         String json =preferences.getString(PrefConstants.CATEGORY_LIST);
         Type type = new TypeToken<List<Category>>() {}.getType();
         categoryList = gson.fromJson(json, type);
-        if (categoryList.get(0).getImage()!=null) {
-         // loadImage(imgTab, categoryList.get(0).getImage());
-            //imgTab.setImageResource(R.drawable.rsz_splash);
-        }
+
+      /*  for (int i=0;i<foodlist.size();i++)
+        {
+            locationList.add(foodlist.get(i).getMap());
+        }*/
+       /* txtMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"CLicked "+locationList.size()+ foodlist.size(), LENGTH_SHORT).show();
+             *//* Intent intent=new Intent(DashboardActivity.this, MapsActivity.class);
+              intent.putExtra("LATLONG",preferences.getString(PrefConstants.CITY_MAP));
+              intent.putExtra("LABEL",preferences.getString(PrefConstants.CITY_NAME));
+              startActivity(intent);*//*
+            }
+        }); */
     }
 
     private void getData() {
@@ -138,7 +156,13 @@ public class FragmentBusiness extends Fragment {
 
         foodlist.add(food);
         foodlist.add(food1);*/
-      callBusinessDetailsWs();
+
+        if (!NetworkUtils.getConnectivityStatusString(getActivity()).equals("Not connected to Internet")) {
+            callBusinessDetailsWs();
+        }else{
+            //DialogManager.showAlert("Network Error, Check your internet connection", SignUpActivity.this);
+            NetworkUtils.showAlert(getActivity());
+        }
     }
 
     private void callBusinessDetailsWs() {
@@ -168,14 +192,17 @@ public class FragmentBusiness extends Fragment {
                 try {
                     Log.v("@RESP", "RespFood: " + response);
                     Log.v("@RESP", "RespFood: " + response.body().getData().size());
-
+                    locationList=new ArrayList<>();
                     UserResponse userResponse = response.body();
                     if (response.body() != null && userResponse.getStatus().equals("Success")) {
                         //    cityList.clear();
                         for (int i = 0; i < userResponse.getData().size(); i++) {
                             foodlist.add(userResponse.getData().get(i));
+                           // locationList.add(userResponse.getData().get(i).getMap());
+                          //  Log.v("@MAP",""+locationList.size());
                         }
                         setData();
+
                     } else {
                         Toast.makeText(context, userResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
@@ -183,6 +210,7 @@ public class FragmentBusiness extends Fragment {
                     ex.printStackTrace();
                     Log.v("@RESP", "RespFoodException: " + ex.getLocalizedMessage());
                     Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
                 progressDialog.dismiss();
             }
@@ -200,5 +228,8 @@ public class FragmentBusiness extends Fragment {
     private void initUI() {
         RecyclerFood=rootView.findViewById(R.id.RecyclerFood);
         imgTab=getActivity().findViewById(R.id.imgTab);
+        txtMap=getActivity().findViewById(R.id.txtMap);
+
+
     }
 }

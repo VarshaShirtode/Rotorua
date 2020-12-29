@@ -12,7 +12,7 @@
     android:layout_height="match_parent"
     android:src="@drawable/gradient_shape"
     android:scaleType="fitXY"
-    android:background="@drawable/splash"
+    android:background="@drawable/city_default"
     ></ImageView>
     <TextView
         android:id="@+id/txtName"

@@ -1,23 +1,22 @@
 package com.nz.nztravelmate.startup;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-
 import com.nz.nztravelmate.R;
 import com.nz.nztravelmate.model.City;
 import com.nz.nztravelmate.model.UserResponse;
 import com.nz.nztravelmate.utils.LocaleManager;
+import com.nz.nztravelmate.utils.NetworkUtils;
 import com.nz.nztravelmate.utils.PrefConstants;
 import com.nz.nztravelmate.utils.Preferences;
 import com.nz.nztravelmate.webservice.ApiService;
@@ -36,7 +35,7 @@ Context context=this;
     View rootView;
     RecyclerView RecyclerFood;
     ArrayList<City> cityList;
-Preferences preferences;
+    Preferences preferences;
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(LocaleManager.setLocale(base));
@@ -46,11 +45,18 @@ Preferences preferences;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_selection);
-preferences=new Preferences(context);
+        preferences=new Preferences(context);
         initUI();
-        getData();
+
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getData();
+    }
+
 
     private void setData() {
         CityAdpater adapter=new CityAdpater(context,cityList);
@@ -83,8 +89,14 @@ preferences=new Preferences(context);
         cityList.add(food3);
         cityList.add(food);
         cityList.add(food1);*/
-        callGetCityWs();
+        if (!NetworkUtils.getConnectivityStatusString(CitySelectionActivity.this).equals("Not connected to Internet")) {
+            callGetCityWs();
+        }else{
+           //DialogManager.showAlert("Network Error, Check your internet connection", SignUpActivity.this);
+             NetworkUtils.showAlert(CitySelectionActivity.this);
+        }
     }
+
 
     private void callGetCityWs() {
             final ProgressDialog progressDialog = new ProgressDialog(this);
@@ -106,7 +118,7 @@ preferences=new Preferences(context);
                         //    cityList.clear();
                             for (int i = 0; i < userResponse.getCity().size(); i++) {
                                     cityList.add(userResponse.getCity().get(i));
-                                Log.v("@RESP", "RespCity: " + userResponse.getCity().get(i).getDescription());
+                                Log.v("message", "RespCity: " + userResponse.getCity().get(i).getDescription());
                             }
                             setData();
                         } else {
@@ -116,6 +128,7 @@ preferences=new Preferences(context);
                         ex.printStackTrace();
                         Log.v("@RESP", "RespCityException: " + ex.getLocalizedMessage());
                         Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
+                      progressDialog.dismiss();
                     }
                     progressDialog.dismiss();
                 }
@@ -124,6 +137,7 @@ preferences=new Preferences(context);
                 public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                     Log.v("@RESP", "RespCityFail: "+t.getLocalizedMessage());
                     Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }
             });
         }
@@ -132,4 +146,6 @@ preferences=new Preferences(context);
     private void initUI() {
         RecyclerFood=findViewById(R.id.RecyclerCity);
     }
+
+
 }

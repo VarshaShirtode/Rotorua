@@ -7,10 +7,10 @@
         android:id="@+id/txtPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tab_description"
+        android:text=""
         android:layout_below="@+id/txtName"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/dimension20dp"
-        android:layout_marginLeft="@dimen/dimension20dp"
+        android:textSize="@dimen/dimension18dp"
+        android:layout_margin="@dimen/dimension20dp"
         ></TextView>
 </RelativeLayout>

@@ -8,6 +8,16 @@ public class City implements Serializable {
         return map;
     }
 
+    public String getPanoramic_image() {
+        return panoramic_image;
+    }
+
+    public void setPanoramic_image(String panoramic_image) {
+        this.panoramic_image = panoramic_image;
+    }
+
+    String panoramic_image="";
+
     public void setMap(String map) {
         this.map = map;
     }

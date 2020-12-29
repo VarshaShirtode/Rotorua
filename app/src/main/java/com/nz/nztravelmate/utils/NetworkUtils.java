@@ -3,6 +3,9 @@ package com.nz.nztravelmate.utils;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
+
+import com.nz.nztravelmate.R;
 
 public class NetworkUtils {
     public static int TYPE_WIFI = 1;
@@ -36,5 +39,19 @@ public class NetworkUtils {
             status = "Not connected to Internet";
         }
         return status;
+    }
+
+    public static void showAlert(Context context) {
+       /* AlertDialog.Builder alert=new AlertDialog.Builder(context);
+        alert.setTitle(R.string.InternetTitle);
+        alert.setMessage(R.string.InterNetMessage);
+        alert.setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alert.show();*/
+        Toast.makeText(context, R.string.InterNetMessage,Toast.LENGTH_SHORT).show();
     }
 }

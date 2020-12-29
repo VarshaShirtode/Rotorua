@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nz.nztravelmate.R;
-import com.nz.nztravelmate.dashboard.ServiceDetailsActivity;
 import com.nz.nztravelmate.model.City;
 import com.nz.nztravelmate.webservice.ApiConstants;
 import com.squareup.picasso.Picasso;
@@ -37,7 +35,7 @@ Context context;
         Log.i("@RESP", "ImageUrl: " + filePath);
         Picasso.with(context)
                 .load(filePath.replace(" ", "%20"))
-                .placeholder(R.drawable.splash_lake)
+                .placeholder(R.drawable.city_default)
                 .into(profileImageView);
     }
 
@@ -55,7 +53,9 @@ Context context;
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         City food=cityList.get(position);
        //final City myListData = listdata[position];
-        holder.txtName.setText(food.getCity_details().get(0).getName());
+        if(food.getCity_details().size()!=0) {
+            holder.txtName.setText(food.getCity_details().get(0).getName());
+        }
         if (food.getImage() != null) {
             loadImage(holder.imgCity, food.getImage());
         } else {
@@ -69,9 +69,13 @@ Context context;
             @Override
             public void onClick(View view) {
                // Toast.makeText(view.getContext(),"click on item: "+cityList.get(position).getName(),Toast.LENGTH_LONG).show();
-                    Intent intent=new Intent(view.getContext(), SplashActivity.class);
-                    intent.putExtra("CityObject",food);
-                    view.getContext().startActivity(intent);
+                   if (food.getCity_details().size()!=0) {
+                       Intent intent = new Intent(view.getContext(), SplashActivity.class);
+                       intent.putExtra("CityObject", food);
+                       view.getContext().startActivity(intent);
+                   }else{
+                       Toast.makeText(context,"No data available for city "+food.getName(),Toast.LENGTH_SHORT).show();
+                   }
             }
         });
     }
