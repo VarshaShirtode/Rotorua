@@ -184,33 +184,61 @@ public class FragmentAttraction extends Fragment {
                         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#33B6FF"));
                         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
                         tabLayout.setTabTextColors(Color.parseColor("#A9A9A9"), Color.parseColor("#33B6FF"));
+                        if (categoryList.get(0).getBanner().length()!=0) {
+                            loadImageBanner(imgTab, categoryList.get(tab.getPosition()).getBanner());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        } else {
+                            loadImage(imgTab, categoryList.get(tab.getPosition()).getImage());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        }
                         break;
                     case 1:
                         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#008000"));
                         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
                         tabLayout.setTabTextColors(Color.parseColor("#A9A9A9"), Color.parseColor("#008000"));
+                        if (categoryList.get(1).getBanner().length()!=0) {
+                            loadImageBanner(imgTab, categoryList.get(tab.getPosition()).getBanner());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        } else {
+                            loadImage(imgTab, categoryList.get(tab.getPosition()).getImage());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        }
                         break;
                     case 2:
                         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FF0000"));
                         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
                         tabLayout.setTabTextColors(Color.parseColor("#A9A9A9"), Color.parseColor("#FF0000"));
+                        if (categoryList.get(2).getBanner().length()!=0) {
+                            loadImageBanner(imgTab, categoryList.get(tab.getPosition()).getBanner());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        } else {
+                            loadImage(imgTab, categoryList.get(tab.getPosition()).getImage());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        }
                         break;
                     case 3:
+                        if (categoryList.get(3).getBanner().length()!=0) {
+                            loadImageBanner(imgTab, categoryList.get(tab.getPosition()).getBanner());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        } else {
+                            loadImage(imgTab, categoryList.get(tab.getPosition()).getImage());
+                            preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
+
+                        }
                         tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#000000"));
                         tabLayout.setSelectedTabIndicatorHeight((int) (5 * getResources().getDisplayMetrics().density));
                         tabLayout.setTabTextColors(Color.parseColor("#A9A9A9"), Color.parseColor("#000000"));
                         break;
                 }
 
-                   if (categoryList.get(0).getBanner().length()!=0) {
-                        loadImageBanner(imgTab, categoryList.get(tab.getPosition()).getBanner());
-                       preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
 
-                   } else {
-                           loadImage(imgTab, categoryList.get(tab.getPosition()).getImage());
-                       preferences.putString(PrefConstants.CATEGORY_ID,categoryList.get(tab.getPosition()).getCategory_details().get(0).getName());
-
-                   }
 
             }
             @Override

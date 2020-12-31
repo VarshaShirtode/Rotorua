@@ -282,11 +282,15 @@ public class SplashActivity
                         for (int i = 0; i < userResponse.getCategory().size(); i++) {
                             Category category=userResponse.getCategory().get(i);
                             if (bannerList.size()!=0) {
-                                if (bannerList.get(i).getImage() != null) {
-                                    category.setBanner(bannerList.get(i).getImage());
-                                }
-                                if (bannerList.get(i).getBusiness_id() != null) {
-                                    category.setBussiness_id(bannerList.get(i).getBusiness_id());
+                                for (int j=0;j<bannerList.size();j++) {
+                                    if (bannerList.get(j).getCategory_id().equals(category.getId())) {
+                                        if (bannerList.get(j).getImage() != null) {
+                                            category.setBanner(bannerList.get(j).getImage());
+                                        }
+                                        if (bannerList.get(j).getBusiness_id() != null) {
+                                            category.setBussiness_id(bannerList.get(j).getBusiness_id());
+                                        }
+                                    }
                                 }
                             }
                             categoryList.add(category);
@@ -410,31 +414,37 @@ public class SplashActivity
         Call<UserResponse> call = apiService.getBannerList();
         call.enqueue(new Callback<UserResponse>() {
             @Override
-            public void onResponse(@NonNull Call<UserResponse> call, @NonNull Response<UserResponse> response) {
-                try {
+            public void onResponse(@NonNull Call<UserResponse> call, Response<UserResponse> response) {
+              // Toast.makeText(context,""+response.body().getBanners().size(), LENGTH_SHORT).show();
+              try {
                     if (response.body() != null) {
                         UserResponse userResponse = response.body();
-                        if (userResponse.getError().equals("0")) {
-                       //Toast.makeText(context,"inside response", Toast.LENGTH_SHORT).show();
+                   if (userResponse.getError().equals("0")) {
 
-                      bannerList=new ArrayList<>();
+                    ArrayList<Banner> bannerList=new ArrayList<>();
                        if (userResponse.getBanners().size() != 0) {
 
                            for (int i = 0; i < userResponse.getBanners().size(); i++) {
-                                Banner banner = userResponse.getBanners().get(i);
-                                if (banner.getCity_id().equals(preferences.getString(PrefConstants.CITY_ID))) {
-                                    bannerList.add(banner);
-                                }
+                               if (userResponse.getBanners().get(i)!=null) {
+                                   Banner banner = userResponse.getBanners().get(i);
+                                       if ( response.body().getBanners().get(i).getCity_id()!=null) {
+                                       if (banner.getCity_id().equals(preferences.getString(PrefConstants.CITY_ID))) {
+                                           bannerList.add(banner);
+                                               Log.v("FCM_TOKEN", "BAnner " + response.body().getBanners().get(i).getCity_id() + " " + response.body().getBanners().get(i).getId());
+                                           }
+
+                                   }
+                               }
                             }
 
                         }
-                            callGetCategoryWs(bannerList);
+                          callGetCategoryWs(bannerList);
                         } else {
                             Toast.makeText(context, userResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             callGetCategoryWs(bannerList);
                         }
 
-                    }
+                   }
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Log.v("@RESP", "RespCityException: " + ex.getLocalizedMessage());
@@ -450,8 +460,9 @@ public class SplashActivity
             @Override
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                 Log.v("@RESP", "RespCityFail: " + t.getLocalizedMessage());
-                Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
+               // Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
                 Log.v("FCM_TOKEN", "RespCity: " + t.getLocalizedMessage());
+                Toast.makeText(context, "FAiled", LENGTH_SHORT).show();
                 progressDialog.dismiss();
             }
         });
