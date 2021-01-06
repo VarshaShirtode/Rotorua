@@ -61,7 +61,7 @@ public class SplashActivity
     Preferences preferences;
     ArrayList<Category> categoryList;
     private View animatedView;
-    private ArrayList<Banner> bannerList;
+    //private ArrayList<Banner> bannerList;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -78,15 +78,7 @@ public class SplashActivity
         /*View backgroundImage = findViewById(R.id.rlMain);
         Drawable background = backgroundImage.getBackground();
         background.setAlpha(190);*/
-        categoryList = new ArrayList<>();
-        if (!NetworkUtils.getConnectivityStatusString(SplashActivity.this).equals("Not connected to Internet")) {
 
-           // bannerList = new ArrayList<Banner>();
-            callGetBannerWS();
-        } else {
-            //DialogManager.showAlert("Network Error, Check your internet connection", SignUpActivity.this);
-            NetworkUtils.showAlert(SplashActivity.this);
-        }
 
 
         Intent intent = getIntent();
@@ -166,6 +158,20 @@ public class SplashActivity
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        categoryList = new ArrayList<>();
+        if (!NetworkUtils.getConnectivityStatusString(SplashActivity.this).equals("Not connected to Internet")) {
+
+            // bannerList = new ArrayList<Banner>();
+            callGetBannerWS();
+        } else {
+            //DialogManager.showAlert("Network Error, Check your internet connection", SignUpActivity.this);
+            NetworkUtils.showAlert(SplashActivity.this);
+        }
+    }
+
     public static Point getScreenDimensions(Context context) {
         int width = context.getResources().getDisplayMetrics().widthPixels;
         int height = context.getResources().getDisplayMetrics().heightPixels;
@@ -197,7 +203,8 @@ public class SplashActivity
             @Override
             public void onPrepareLoad(final Drawable placeHolderDrawable) {
                 Log.v("PANORAMA", "Prepare Load");
-                // animatedView.setBackground(placeHolderDrawable);
+                animatedView.setBackground(getResources().getDrawable(R.drawable.wave_repeating_bg));
+                setAnimation("default");
                /* final int screenWidth = getScreenDimensions(context).x;
                 final int screenHeight = getScreenDimensions(context).y;
 
@@ -327,6 +334,7 @@ public class SplashActivity
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                 Log.v("@RESP", "RespCityFail: " + t.getLocalizedMessage());
                 Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
@@ -400,6 +408,7 @@ public class SplashActivity
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                 Log.v("@RESP", "RespFoodFail: " + t.getLocalizedMessage());
                 Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
@@ -419,26 +428,32 @@ public class SplashActivity
               try {
                     if (response.body() != null) {
                         UserResponse userResponse = response.body();
-                   if (userResponse.getError().equals("0")) {
+                       ArrayList bannerList = new ArrayList<>();
+                        if (userResponse!=null)
+                        {
+                        if (userResponse.getError().equals("0")) {
 
-                    ArrayList<Banner> bannerList=new ArrayList<>();
-                       if (userResponse.getBanners().size() != 0) {
 
-                           for (int i = 0; i < userResponse.getBanners().size(); i++) {
-                               if (userResponse.getBanners().get(i)!=null) {
-                                   Banner banner = userResponse.getBanners().get(i);
-                                       if ( response.body().getBanners().get(i).getCity_id()!=null) {
-                                       if (banner.getCity_id().equals(preferences.getString(PrefConstants.CITY_ID))) {
-                                           bannerList.add(banner);
+                       if (userResponse.getBanners() != null) {
+                           if (userResponse.getBanners().size() != 0) {
+
+                               for (int i = 0; i < userResponse.getBanners().size(); i++) {
+                                   if (userResponse.getBanners().get(i) != null) {
+                                       Banner banner = userResponse.getBanners().get(i);
+                                       if (response.body().getBanners().get(i).getCity_id() != null) {
+                                           if (banner.getCity_id().equals(preferences.getString(PrefConstants.CITY_ID))) {
+                                               bannerList.add(banner);
                                                Log.v("FCM_TOKEN", "BAnner " + response.body().getBanners().get(i).getCity_id() + " " + response.body().getBanners().get(i).getId());
                                            }
 
+                                       }
                                    }
                                }
-                            }
+                           }
 
-                        }
-                          callGetCategoryWs(bannerList);
+                       }
+                       callGetCategoryWs(bannerList);
+                       }
                         } else {
                             Toast.makeText(context, userResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             callGetCategoryWs(bannerList);
@@ -450,7 +465,7 @@ public class SplashActivity
                     Log.v("@RESP", "RespCityException: " + ex.getLocalizedMessage());
                     Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
                     Log.v("FCM_TOKEN", "RespCityexcePTION: " + ex.getLocalizedMessage() + " " + ex.getMessage() + "" + ex.toString());
-                    bannerList=new ArrayList<>();
+                    ArrayList bannerList=new ArrayList<>();
                     callGetCategoryWs(bannerList);
                     progressDialog.dismiss();
                 }

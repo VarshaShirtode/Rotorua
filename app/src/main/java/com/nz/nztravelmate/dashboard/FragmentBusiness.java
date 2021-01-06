@@ -219,6 +219,7 @@ getData();
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                 Log.v("@RESP", "RespFoodFail: "+t.getLocalizedMessage());
                 Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
     }
