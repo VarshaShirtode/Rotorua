@@ -325,16 +325,40 @@ public class SplashActivity
                     ex.printStackTrace();
                     Log.v("@RESP", "RespCityException: " + ex.getLocalizedMessage());
                     Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                     try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
                 }
-                progressDialog.dismiss();
+                }
+                 try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                 Log.v("@RESP", "RespCityFail: " + t.getLocalizedMessage());
                 Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                 try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
             }
         });
     }
@@ -399,16 +423,40 @@ public class SplashActivity
                     ex.printStackTrace();
                     Log.v("@RESP", "RespFoodException: " + ex.getLocalizedMessage());
                     Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                     try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
                 }
-                progressDialog.dismiss();
+                }
+                try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
             }
 
             @Override
             public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                 Log.v("@RESP", "RespFoodFail: " + t.getLocalizedMessage());
                 Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                 try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
             }
         });
     }
@@ -467,9 +515,25 @@ public class SplashActivity
                     Log.v("FCM_TOKEN", "RespCityexcePTION: " + ex.getLocalizedMessage() + " " + ex.getMessage() + "" + ex.toString());
                     ArrayList bannerList=new ArrayList<>();
                     callGetCategoryWs(bannerList);
-                    progressDialog.dismiss();
+                     try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
                 }
-                progressDialog.dismiss();
+                }
+                 try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
             }
 
             @Override
@@ -478,7 +542,15 @@ public class SplashActivity
                // Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
                 Log.v("FCM_TOKEN", "RespCity: " + t.getLocalizedMessage());
                 Toast.makeText(context, "FAiled", LENGTH_SHORT).show();
-                progressDialog.dismiss();
+                 try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
             }
         });
     }

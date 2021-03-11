@@ -14,7 +14,10 @@
         android:padding="@dimen/dimension10dp"
         android:background="#00000000"
         >
-
+<RelativeLayout
+    android:id="@+id/txtHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imgProfile"
             android:layout_width="@dimen/dimension70dp"
@@ -22,7 +25,6 @@
             android:layout_alignParentLeft="true"
             android:layout_marginStart="@dimen/dimension10dp"
             android:layout_marginLeft="@dimen/dimension10dp"
-            android:layout_marginTop="@dimen/dimension10dp"
             android:layout_marginEnd="@dimen/dimension10dp"
             android:layout_marginRight="@dimen/dimension10dp"
             android:background="#00000000"
@@ -50,6 +52,7 @@
             android:layout_below="@+id/txtName"
             android:layout_centerVertical="true"
             ></TextView>
+    </RelativeLayout>
         <TextView
             android:id="@+id/txtShort"
             android:layout_width="match_parent"
@@ -57,10 +60,8 @@
             android:textColor="@color/colorBlackGray"
             android:text=""
             android:textSize="@dimen/dimension17dp"
-            android:layout_toRightOf="@+id/imgProfile"
-            android:layout_below="@+id/txtAddress"
+            android:layout_below="@+id/txtHeader"
             ></TextView>
-
         <ImageView
             android:id="@+id/imgRight"
             android:layout_width="@dimen/dimension30dp"

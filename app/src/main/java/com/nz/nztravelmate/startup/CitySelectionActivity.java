@@ -128,16 +128,40 @@ Context context=this;
                         ex.printStackTrace();
                         Log.v("@RESP", "RespCityException: " + ex.getLocalizedMessage());
                         Toast.makeText(context, ex.getLocalizedMessage(), LENGTH_SHORT).show();
-                      progressDialog.dismiss();
+                       try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
                     }
-                    progressDialog.dismiss();
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
+                    }
+                     try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<UserResponse> call, @NonNull Throwable t) {
                     Log.v("@RESP", "RespCityFail: "+t.getLocalizedMessage());
                     Toast.makeText(context, t.getLocalizedMessage(), LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                     try {
+                    if ((progressDialog!= null) && progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                    }
+                } catch (final IllegalArgumentException e) {
+                    // Handle or log or ignore
+                } catch (final Exception e) {
+                    // Handle or log or ignore
+                }
                 }
             });
         }

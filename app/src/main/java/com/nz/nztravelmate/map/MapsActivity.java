@@ -1,39 +1,44 @@
  package com.nz.nztravelmate.map;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
+ import android.Manifest;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.pm.PackageManager;
+ import android.graphics.Bitmap;
+ import android.graphics.Canvas;
+ import android.graphics.Color;
+ import android.graphics.drawable.Drawable;
+ import android.net.Uri;
+ import android.os.Bundle;
+ import android.util.Log;
+ import android.view.View;
+ import android.widget.ImageView;
+ import android.widget.Toast;
 
-import androidx.annotation.DrawableRes;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.fragment.app.FragmentActivity;
+ import androidx.annotation.DrawableRes;
+ import androidx.appcompat.content.res.AppCompatResources;
+ import androidx.core.content.ContextCompat;
+ import androidx.core.graphics.drawable.DrawableCompat;
+ import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.nz.nztravelmate.R;
-import com.nz.nztravelmate.dashboard.ServiceDetailsActivity;
-import com.nz.nztravelmate.model.Data;
-import com.nz.nztravelmate.model.Maps;
-import com.nz.nztravelmate.utils.PrefConstants;
-import com.nz.nztravelmate.utils.Preferences;
+ import com.google.android.gms.maps.CameraUpdateFactory;
+ import com.google.android.gms.maps.GoogleMap;
+ import com.google.android.gms.maps.OnMapReadyCallback;
+ import com.google.android.gms.maps.SupportMapFragment;
+ import com.google.android.gms.maps.model.BitmapDescriptor;
+ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+ import com.google.android.gms.maps.model.CameraPosition;
+ import com.google.android.gms.maps.model.LatLng;
+ import com.google.android.gms.maps.model.Marker;
+ import com.google.android.gms.maps.model.MarkerOptions;
+ import com.nz.nztravelmate.R;
+ import com.nz.nztravelmate.dashboard.ServiceDetailsActivity;
+ import com.nz.nztravelmate.model.Data;
+ import com.nz.nztravelmate.model.Maps;
+ import com.nz.nztravelmate.utils.PrefConstants;
+ import com.nz.nztravelmate.utils.Preferences;
 
-import java.util.ArrayList;
+ import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
     Context context=this;
@@ -50,11 +55,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     ArrayList<Data> businessList;
 
     boolean fromList=false;
+    ImageView imgDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        imgDirection=findViewById(R.id.imgDirection);
+
         preferences=new Preferences(context);
         Intent intent=getIntent();
         if (intent.hasExtra("LABEL")) {
@@ -192,6 +200,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setMapToolbarEnabled(true);
+        //mMap.getUiSettings().setMyLocationButtonEnabled(true);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+        } else {
+            // Show rationale and request permission.
+        }
         mMap.setOnMarkerClickListener(this);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         if(fromList==true&&latlongListMap.size()!=0)
@@ -285,11 +300,80 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 double lat = Double.parseDouble(Lattitude);
                 double lng = Double.parseDouble(Longitude);
                 // Add a marker in Sydney and move the camera-41.2767048,174.7719213
-                // LatLng sydney = new LatLng(-38.1534,176.2403);
+              //  LatLng sydney = new LatLng(17.6805,74.0183);
                 LatLng sydney = new LatLng(lat, lng);
-                mMap.addMarker(new MarkerOptions().position(sydney).title(Label));
+
+                MarkerOptions markeroption=new MarkerOptions()
+                        .position(sydney)
+                        .title(Label);
+                Marker marker=mMap.addMarker(markeroption);
+
+                 imgDirection.setVisibility(View.VISIBLE);
+                 imgDirection.setOnClickListener(new View.OnClickListener() {
+                     @Override
+                     public void onClick(View v) {
+                         Uri navigationIntentUri = Uri.parse("google.navigation:q=" + lat +"," + lng);//creating intent with latlng
+                         Intent mapIntent = new Intent(Intent.ACTION_VIEW, navigationIntentUri);
+                         mapIntent.setPackage("com.google.android.apps.maps");
+                         startActivity(mapIntent);
+                     }
+                 });
+
                 CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition), new GoogleMap.CancelableCallback() {
+                    @Override
+                    public void onFinish() {
+                        if (!marker.isInfoWindowShown())
+                        {
+                            marker.showInfoWindow();
+                        }
+                    }
+
+                    @Override
+                    public void onCancel() {
+
+                    }
+                });
+
+
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        marker.showInfoWindow();
+                     //   Toast.makeText(context,"CLciked",Toast.LENGTH_SHORT).show();
+                       /* Uri navigationIntentUri = Uri.parse("google.navigation:q=" + lat +"," + lng);//creating intent with latlng
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, navigationIntentUri);
+                        mapIntent.setPackage("com.google.android.apps.maps");
+                        startActivity(mapIntent);*/
+                        return true;
+                    }
+                });
+
+                mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+                    @Override
+                    public void onInfoWindowClick(Marker marker) {
+                        // TODO Auto-generated method stub
+                        if (fromList==true) {
+                            LatLng latLong = marker.getPosition();
+                            String title = marker.getTitle();
+                            for (int i = 0; i < latlongList.size(); i++) {
+                                //  Log.v("LATLIST",latlongList.get(i).getName()+" "+latlongList.get(i).getStaff());
+                                if (latlongList.get(i).getName().equals(title)) {
+                                    Intent intent = new Intent(context, ServiceDetailsActivity.class);
+                                    intent.putExtra("ItemObject", latlongList.get(i));
+                                    context.startActivity(intent);
+                                }
+                            }
+                        }else{
+                           // Toast.makeText(context,"CLciked",Toast.LENGTH_SHORT).show();
+                            Uri navigationIntentUri = Uri.parse("google.navigation:q=" + lat +"," + lng);//creating intent with latlng
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW, navigationIntentUri);
+                            mapIntent.setPackage("com.google.android.apps.maps");
+                            startActivity(mapIntent);
+                        }
+                    }
+                });
             }
         }
 
@@ -297,6 +381,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+
       /*  if (fromList==true) {
             LatLng latLong = marker.getPosition();
             String title = marker.getTitle();

@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,3 +13,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".map.MapsActivity" />
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/imgDirection"
+        android:layout_width="@dimen/dimension50dp"
+        android:layout_height="@dimen/dimension50dp"
+        android:src="@drawable/direction"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dimension40dp"
+        ></ImageView>
+</RelativeLayout>
